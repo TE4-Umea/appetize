@@ -10,7 +10,24 @@ void main() {
 class FrontPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /* SystemChrome.setEnabledSystemUIOverlays([]); */
-    return MaterialApp(debugShowCheckedModeBanner: false);
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        body: Padding(
+          child: Column(
+            children: <Widget>[
+              Image.asset(
+                "assets/olearys.png",
+              ),
+              Image.asset(
+                "assets/greek.png",
+              )
+            ],
+          ),
+          padding: EdgeInsets.all(50),
+        ),
+      ),
+    );
   }
 }
