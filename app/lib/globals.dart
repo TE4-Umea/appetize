@@ -1,0 +1,1 @@
+library appetize.globals;
