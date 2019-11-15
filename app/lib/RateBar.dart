@@ -68,29 +68,38 @@ class Smiley extends StatefulWidget {
 class _SmileyState extends State<Smiley> {
   @override
   Widget build(BuildContext context) {
+    double width = (MediaQuery.of(context).size.width - 50 - (10 * 4)) / 4;
     return GestureDetector(
       child: ValueListenableBuilder<int>(
         builder: (context, value, _) {
-          print(globals.foodRating.value);
-          return Container(
-            child: Icon(
-              widget.smileys[widget.value],
-              color: value == -1
-                  ? widget.color
-                  : (value == widget.value
-                      ? widget.colors[widget.value]
-                      : Colors.grey[800]),
-              size: (MediaQuery.of(context).size.width - 50 - (10 * 4)) / 4,
-            ),
+          return Stack(
+            children: <Widget>[
+              AnimatedPositioned(
+                duration: Duration(milliseconds: 200),
+                child: Icon(
+                  widget.smileys[widget.value],
+                  color: value == -1
+                      ? widget.color
+                      : (value == widget.value
+                          ? widget.colors[widget.value]
+                          : Colors.grey[800]),
+                  size: width,
+                ),
+                top: value == widget.value ? -5 : 0,
+                curve: Curves.easeOutExpo,
+                left: 0,
+              ),
+              Container(
+                height: width + 5,
+                width: width,
+              ),
+            ],
           );
         },
         valueListenable: globals.foodRating,
       ),
       onTap: () {
-        setState(() {
-          print('ID: ' + globals.id);
-          globals.foodRating.value = widget.value;
-        });
+        globals.foodRating.value = widget.value;
       },
     );
   }
