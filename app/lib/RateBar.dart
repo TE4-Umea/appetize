@@ -29,10 +29,10 @@ class _RateBarState extends State<RateBar> {
           child: Padding(
             child: Row(
               children: <Widget>[
-                Smiley(3),
-                Smiley(2),
-                Smiley(1),
-                Smiley(0),
+                Smiley(3, widget.color),
+                Smiley(2, widget.color),
+                Smiley(1, widget.color),
+                Smiley(0, widget.color),
               ],
             ),
             padding: EdgeInsets.all(20),
@@ -57,7 +57,9 @@ class Smiley extends StatefulWidget {
     Colors.green
   ];
 
-  Smiley(this.value);
+  Color color;
+
+  Smiley(this.value, this.color);
 
   @override
   _SmileyState createState() => _SmileyState();
@@ -74,7 +76,7 @@ class _SmileyState extends State<Smiley> {
             child: Icon(
               widget.smileys[widget.value],
               color: value == -1
-                  ? globals.restaurants['olearys'].color
+                  ? widget.color
                   : (value == widget.value
                       ? widget.colors[widget.value]
                       : Colors.grey[800]),
@@ -86,6 +88,7 @@ class _SmileyState extends State<Smiley> {
       ),
       onTap: () {
         setState(() {
+          print('ID: ' + globals.id);
           globals.foodRating.value = widget.value;
         });
       },

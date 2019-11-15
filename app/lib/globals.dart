@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 
 import 'Restaurant.dart';
 
+String id;
+
 Map restaurants = {
   'greek': Restaurant('Greek Grill', 'assets/greek.png'),
   'olearys': Restaurant("O'learys", 'assets/olearys.png'),

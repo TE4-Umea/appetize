@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'Restaurant.dart';
+import 'globals.dart' as globals;
 
 class RestaurantWidget extends StatefulWidget {
   Restaurant restaurant;
@@ -56,7 +57,9 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                   ),
                   /* shape: CircleBorder(), */
                 ),
-                visible: true,
+                visible:
+                    globals.restaurants[globals.choosenRestaurant.value].name ==
+                        widget.restaurant.name,
               )),
         ],
       ),
