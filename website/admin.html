@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Appetize</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <a href="/admin">Adminsida</a>
-    <img src="img/icon_512.png" alt="Logo" id="logo">
-    <div id="badges">
-        <img src="img/appstore.png" alt="Apple badge" class="badge">
-        <img src="img/google_play.png" alt="Google play badge" class="badge">
-    </div>
+    <img src="img/icon_512.png" alt="Logo" id="admin-logo">
+    <input type="text" placeholder="Username" id="username">
+    <br>
+    <input type="password" placeholder="Password" id="password"><br>
+    <button onclick="login()">Login</button>
+    <span id="error-message"></span>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
