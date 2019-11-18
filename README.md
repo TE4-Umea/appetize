@@ -17,3 +17,84 @@
 # Systems description
 
 ![](assets/klassdiagram.png)
+
+# API
+
+## POST /api/profile
+
+Submit your profile form for today.
+"vote" is how much you liked the food, from 0 (bad) to 3 (good).
+"comments" is an array of optional comments added by the user.
+"id" is the users APPETIZE_ID that is unique to them and can be acquired via POST /api/register.
+
+```json
+REQUEST {
+    "vote": 0 - 3,
+    "comments": ["Kall mat", "Lång kö"],
+    "id": "APPETIZE_9CE5C3ECFF28354878AA51592797E37F"
+}
+
+RESPONSE {
+    "success": true | false,
+    "text": "Success!" | "Error message..."
+}
+```
+
+## GET /api/profile
+
+Get your profile from the server. Basically a login.
+
+```json
+REQUEST {
+    "id": "APPETIZE_9CE5C3ECFF28354878AA51592797E37F"
+}
+
+RESPONSE {
+    "success": true | false,
+    "text": "Success!" | "Error message...",
+    "profile": {
+        "class": "TE17",
+        "restaurant": "Greek",
+        "vote": 3,
+        "comments": ["Kall mat", "Lång kö"],
+        "messages": [
+            {
+                content: "Message content goes here",
+                id: 9842384732
+            }
+        ]
+    }
+```
+
+## POST /api/register
+
+Register an APPETIZE account
+
+```json
+REQUEST {
+    "code": "ABCD"
+}
+
+RESPONSE {
+    "success": true | false,
+    "text": "Success!" | "Invalid signup code",
+    "id": "APPETIZE_9CE5C3ECFF28354878AA51592797E37F"
+}
+```
+
+## POST /api/login
+
+Login as an admin
+
+```json
+REQUEST {
+    "username": "admin",
+    "password": "admin"
+}
+
+RESPONSE {
+    "success": true,
+    "token": "APPETIZE_9CE5C3ECFF28354878AA51592797E37F",
+    "text": "Wrong password"
+}
+```

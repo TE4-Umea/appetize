@@ -21,5 +21,7 @@ module.exports = class Server {
         new (require("./Routes"))(app);
         // Create the server and start it on the port in config.json
         var server = http.createServer(app).listen(config.port);
+        // Launch API
+        new (require("./API"))(app, config);
     }
 };
