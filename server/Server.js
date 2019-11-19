@@ -23,5 +23,8 @@ module.exports = class Server {
         var server = http.createServer(app).listen(config.port);
         // Launch API
         new (require("./API"))(app, config);
+
+        console.log('Connecting to database "' + config.mysql_name + '"');
+        console.log("Started Appetize Server on port " + config.port);
     }
 };

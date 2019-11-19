@@ -1,3 +1,4 @@
+import 'package:Appetize/API.dart';
 import 'package:flutter/material.dart';
 import 'globals.dart' as globals;
 
@@ -100,6 +101,7 @@ class _SmileyState extends State<Smiley> {
       ),
       onTap: () {
         globals.foodRating.value = widget.value;
+        API.submitProfile();
       },
     );
   }

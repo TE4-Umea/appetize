@@ -17,6 +17,42 @@ DROP DATABASE IF EXISTS `appetize`;
 CREATE DATABASE IF NOT EXISTS `appetize` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
 USE `appetize`;
 
+-- Dumpar struktur för tabell appetize.admins
+DROP TABLE IF EXISTS `admins`;
+CREATE TABLE IF NOT EXISTS `admins` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `password` varchar(250) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dataexport var bortvalt.
+
+-- Dumpar struktur för tabell appetize.classes
+DROP TABLE IF EXISTS `classes`;
+CREATE TABLE IF NOT EXISTS `classes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `time` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `restaurant` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dataexport var bortvalt.
+
+-- Dumpar struktur för tabell appetize.codes
+DROP TABLE IF EXISTS `codes`;
+CREATE TABLE IF NOT EXISTS `codes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `creator` int(11) NOT NULL DEFAULT '0',
+  `class` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- Dataexport var bortvalt.
+
 -- Dumpar struktur för tabell appetize.forms
 DROP TABLE IF EXISTS `forms`;
 CREATE TABLE IF NOT EXISTS `forms` (
@@ -27,7 +63,18 @@ CREATE TABLE IF NOT EXISTS `forms` (
   `rating` float NOT NULL,
   `text` text COLLATE utf8_bin,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Daily input and reviews from students are saved here.\r\n';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Daily input and reviews from students are saved here.\r\n';
+
+-- Dataexport var bortvalt.
+
+-- Dumpar struktur för tabell appetize.tokens
+DROP TABLE IF EXISTS `tokens`;
+CREATE TABLE IF NOT EXISTS `tokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `token` varchar(250) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- Dataexport var bortvalt.
 
@@ -37,8 +84,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `token` varchar(250) COLLATE utf8_bin NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `class` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- Dataexport var bortvalt.
 

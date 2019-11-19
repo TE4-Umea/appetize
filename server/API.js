@@ -3,6 +3,16 @@ module.exports = class API {
         const User = new (require("./User"))(config);
         const db = new (require("./Database"))(config);
 
+        // APP API
+        app.post("/api/profile", async (req, res) => {
+            var req = this.parseRequest(req);
+            console.log(req);
+
+            this.respond(res);
+        });
+
+        // ADMIN API
+
         app.post("/api/login", async (req, res) => {
             var user = await User.getAdmin(
                 req.body.username,
@@ -140,7 +150,7 @@ module.exports = class API {
         return body;
     }
 
-    respond(res, success = true, text = "Success!", params = {}) {
+    respond(res, success = true, text = "", params = {}) {
         var build = {
             success,
             text

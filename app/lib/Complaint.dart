@@ -19,8 +19,7 @@ class ComplaintButtonState extends State<ComplaintButton> {
             onPressed: () {
               globals.foodRating.value = -1;
             },
-            textColor:
-                globals.restaurants[globals.choosenRestaurant.value].color,
+            textColor: globals.restaurants[globals.restaurant.value].color,
           ),
           height: 50,
           minWidth: MediaQuery.of(context).size.width - 200,

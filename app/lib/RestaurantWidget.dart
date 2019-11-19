@@ -57,9 +57,8 @@ class _RestaurantWidgetState extends State<RestaurantWidget> {
                   ),
                   /* shape: CircleBorder(), */
                 ),
-                visible:
-                    globals.restaurants[globals.choosenRestaurant.value].name ==
-                        widget.restaurant.name,
+                visible: globals.restaurants[globals.restaurant.value].name ==
+                    widget.restaurant.name,
               )),
         ],
       ),
