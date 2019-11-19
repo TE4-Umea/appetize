@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:Appetize/globals.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class API {
@@ -11,11 +13,23 @@ class API {
       'Accept': 'application/json'
     };
 
-    JsonEncoder encoder = JsonEncoder();
     String profile =
         json.encode({"id": "APPETIZE_0", "vote": foodRating.value});
 
-    Response response = await post(url, headers: headers, body: profile);
-    print(response.body.toString());
+    statusText.value = 'Tack för din feedback!';
+
+    apiTimeout = Timer(Duration(seconds: 1), () {
+      if (deliverStatus.value == 1) deliverStatus.value = 0;
+    });
+
+    try {
+      await post(url, headers: headers, body: profile);
+      apiTimeout.cancel();
+      deliverStatus.value = 2;
+    } catch (_) {
+      deliverStatus.value = 0;
+    }
   }
+
+  static getProfile() async {}
 }

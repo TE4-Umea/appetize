@@ -101,6 +101,7 @@ class _SmileyState extends State<Smiley> {
       ),
       onTap: () {
         globals.foodRating.value = widget.value;
+        globals.deliverStatus.value = 1;
         API.submitProfile();
       },
     );

@@ -6,8 +6,7 @@ module.exports = class API {
         // APP API
         app.post("/api/profile", async (req, res) => {
             var req = this.parseRequest(req);
-            console.log(req);
-
+            var user = await User.get(req.id);
             this.respond(res);
         });
 
@@ -122,6 +121,14 @@ module.exports = class API {
                     )
             });
         });
+    }
+
+    async getClass(id) {
+        var dbClass = this.db.query_one(
+            "SELECT * FROM classes where id = ?",
+            id
+        );
+        return dbClass;
     }
 
     generateCode() {
