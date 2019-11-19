@@ -3,6 +3,15 @@ module.exports = class API {
         const User = new (require("./User"))(config);
         const db = new (require("./Database"))(config);
 
+        // APP API
+        app.post("/api/profile", async (req, res) => {
+            var req = this.parseRequest(req);
+            var user = await User.get(req.id);
+            this.respond(res);
+        });
+
+        // ADMIN API
+
         app.post("/api/login", async (req, res) => {
             var user = await User.getAdmin(
                 req.body.username,
@@ -114,6 +123,14 @@ module.exports = class API {
         });
     }
 
+    async getClass(id) {
+        var dbClass = this.db.query_one(
+            "SELECT * FROM classes where id = ?",
+            id
+        );
+        return dbClass;
+    }
+
     generateCode() {
         var code = "";
         for (var i = 0; i < 4; i++) {
@@ -140,7 +157,7 @@ module.exports = class API {
         return body;
     }
 
-    respond(res, success = true, text = "Success!", params = {}) {
+    respond(res, success = true, text = "", params = {}) {
         var build = {
             success,
             text

@@ -61,9 +61,11 @@ function loadManeageBoard() {
             classes = data.classes;
             for (let entry of classes) {
                 document.getElementById("classes").innerHTML += `
-                <div class="class"><b>${entry.name}</b> - ${
+                <div class="class" id="class_${entry.id}"><b>${
+                    entry.name
+                }</b> - <span id="time_${entry.id}">${
                     entry.time
-                } - <div class="restaurant" style="background:${
+                }</span> - <div class="restaurant" style="background:${
                     colors[entry.restaurant]
                 }">${restaurants[entry.restaurant]}</div><br>
                 <button onclick="generate_code(${
@@ -71,7 +73,7 @@ function loadManeageBoard() {
                 })">GENERERA KOD</button><br>
                 <input type="text" placeholder="TID" oninput="change_time(${
                     entry.id
-                }, this.value)" value="${entry.time}"><br>
+                }, this)" value="${entry.time}"><br>
                 <input type="radio" oninput="change_restaurant(${
                     entry.id
                 }, this.value)" name="restaurant_${entry.name}" value="greek" ${
@@ -90,12 +92,14 @@ function loadManeageBoard() {
         });
 }
 
-function change_time(id, value) {
+function change_time(id, el) {
     axios.post("/api/time", {
         token,
         id,
-        value
+        value: el.value
     });
+
+    document.getElementById("time_" + id).innerText = el.value;
 }
 
 function generate_code(class_id) {

@@ -7,6 +7,16 @@ module.exports = class Routes {
         };
     }
 
+    async get(appetize_id) {
+        var user = await this.db.query_one(
+            "SELECT * FROM users WHERE appetize_id = ?",
+            appetize_id
+        );
+        if (user) {
+            console.log(user);
+        }
+    }
+
     async getAdmin(username, password) {
         var user = await this.db.query_one(
             "SELECT * FROM admins WHERE username = ?",

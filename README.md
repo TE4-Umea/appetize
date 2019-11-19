@@ -29,14 +29,14 @@ Submit your profile form for today.
 
 ```json
 REQUEST {
-    "vote": 0 - 3,
+    "vote": 3,
     "comments": ["Kall mat", "Lång kö"],
     "id": "APPETIZE_9CE5C3ECFF28354878AA51592797E37F"
 }
 
 RESPONSE {
-    "success": true | false,
-    "text": "Success!" | "Error message..."
+    "success": true,
+    "text": "Success!"
 }
 ```
 
@@ -50,8 +50,8 @@ REQUEST {
 }
 
 RESPONSE {
-    "success": true | false,
-    "text": "Success!" | "Error message...",
+    "success": true,
+    "text": "Success!",
     "profile": {
         "class": "TE17",
         "restaurant": "Greek",
@@ -76,8 +76,8 @@ REQUEST {
 }
 
 RESPONSE {
-    "success": true | false,
-    "text": "Success!" | "Invalid signup code",
+    "success": true,
+    "text": "Success!",
     "id": "APPETIZE_9CE5C3ECFF28354878AA51592797E37F"
 }
 ```

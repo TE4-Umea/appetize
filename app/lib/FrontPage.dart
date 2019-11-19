@@ -4,6 +4,7 @@ import 'package:Appetize/Complaint.dart';
 import 'package:Appetize/ComplaintCard.dart';
 import 'package:Appetize/FrontPageText.dart';
 import 'package:Appetize/RateBar.dart';
+import 'package:Appetize/TopCard.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'RestaurantWidget.dart';
@@ -24,7 +25,7 @@ class FrontPage extends StatelessWidget {
             // Body
             children: <Widget>[
               ValueListenableBuilder(
-                valueListenable: globals.choosenRestaurant,
+                valueListenable: globals.restaurant,
                 builder: (context, value, _) {
                   return Wrap(
                     direction: Axis.horizontal,
@@ -32,19 +33,14 @@ class FrontPage extends StatelessWidget {
                     spacing: 0,
                     runSpacing: 5,
                     children: <Widget>[
-                      GestureDetector(
-                        child: RestaurantWidget(restaurants['greek']),
-                        onTap: () {
-                          globals.choosenRestaurant.value = 'greek';
-                        },
+                      Padding(
+                        child: TopCard(),
+                        padding: EdgeInsets.only(top: 40),
                       ),
-                      GestureDetector(
-                        child: RestaurantWidget(restaurants['olearys']),
-                        onTap: () {
-                          globals.choosenRestaurant.value = 'olearys';
-                        },
+                      Padding(
+                        child: FrontPageText(),
+                        padding: EdgeInsets.only(top: 10),
                       ),
-                      FrontPageText(),
                       Padding(
                         child: RateBar(globals.restaurants[value].color),
                         padding: EdgeInsets.only(top: 10),
