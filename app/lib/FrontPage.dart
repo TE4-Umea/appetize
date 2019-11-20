@@ -45,6 +45,7 @@ class FrontPage extends StatelessWidget {
                         child: RateBar(globals.restaurants[value].color),
                         padding: EdgeInsets.only(top: 10),
                       ),
+                      ComplaintButton(),
                     ],
                   );
                 },
