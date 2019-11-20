@@ -40,7 +40,10 @@ class _ComplaintCardState extends State<ComplaintCard> {
                           color: Colors.white),
                       child: TextField(
                         maxLines: 1,
-                        style: new TextStyle(fontSize: 16),
+                        style: new TextStyle(
+                            color: globals
+                                .restaurants[globals.restaurant.value].color,
+                            fontSize: 16),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
