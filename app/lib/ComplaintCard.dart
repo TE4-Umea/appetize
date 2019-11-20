@@ -23,8 +23,12 @@ class _ComplaintCardState extends State<ComplaintCard> {
                           Text(
                             'Kommentar',
                             textScaleFactor: 1.5,
+                            style: new TextStyle(color: Colors.white),
                           ),
-                          Icon(Icons.clear),
+                          Icon(
+                            Icons.clear,
+                            color: Colors.white,
+                          ),
                         ],
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       ),
@@ -46,19 +50,23 @@ class _ComplaintCardState extends State<ComplaintCard> {
                 ),
                 padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
               ),
-              decoration: BoxDecoration(
-                border: Border.all(
-                    width: 2.0,
-                    color: globals.restaurants[globals.restaurant.value].color),
-              ),
             ),
             Container(
-              height: 7,
-              color: globals.restaurants[globals.restaurant.value].color,
+              height: 20,
+              decoration: BoxDecoration(
+                color: globals.restaurants[globals.restaurant.value].darkColor,
+                borderRadius: new BorderRadius.only(
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                ),
+              ),
             ),
           ],
         ),
-        color: Colors.white,
+        decoration: BoxDecoration(
+          color: globals.restaurants[globals.restaurant.value].color,
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
       ),
       padding: EdgeInsets.fromLTRB(30, 0, 30, 30),
     );
