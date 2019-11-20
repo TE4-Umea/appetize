@@ -1,21 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:Appetize/Preferences.dart';
 import 'package:Appetize/globals.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class API {
-  static submitProfile() async {
-    String url = 'http://10.0.2.2:5050/api/profile';
+  static _post(String path, Map body) async {
+    String url = API_ENDPOINT + path;
     Map<String, String> headers = {
       "Content-type": "application/json",
       'Accept': 'application/json'
     };
 
-    String profile =
-        json.encode({"id": "APPETIZE_0", "vote": foodRating.value});
+    return post(url, headers: headers, body: json.encode(body));
+  }
 
+  static submitProfile() async {
     statusText.value = 'Tack för din feedback!';
 
     apiTimeout = Timer(Duration(seconds: 1), () {
@@ -23,7 +24,8 @@ class API {
     });
 
     try {
-      await post(url, headers: headers, body: profile);
+      await _post(
+          '/api/profile', {"id": "APPETIZE_0", "vote": foodRating.value});
       apiTimeout.cancel();
       deliverStatus.value = 2;
     } catch (_) {
@@ -31,5 +33,40 @@ class API {
     }
   }
 
-  static getProfile() async {}
+  static logout() {
+    appetizeId = '';
+    savePreferences();
+    navigatorKey.currentState.pop();
+  }
+
+  static getProfile() async {
+    String url = API_ENDPOINT + "/api/profile?id=" + appetizeId;
+    Response response = await get(url);
+    Map body = json.decode(response.body);
+    if (body['success']) {
+      eatTime.value = body['profile']['time'];
+      restaurant.value = body['profile']['restaurant'];
+
+      navigatorKey.currentState.pushNamed('/home');
+    } else {
+      navigatorKey.currentState.pushNamed('/');
+    }
+  }
+
+  static signup(code) async {
+    try {
+      var response = await _post('/api/signup', {"code": code});
+
+      var res = json.decode(response.body);
+
+      if (res["success"]) {
+        appetizeId = res["id"];
+        await savePreferences();
+        getProfile();
+        //navigatorKey.currentState.pushNamed('/home');
+      } else {
+        signupStatus.value = res["text"];
+      }
+    } catch (_) {}
+  }
 }

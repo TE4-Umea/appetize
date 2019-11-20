@@ -13,8 +13,29 @@ module.exports = class Routes {
             appetize_id
         );
         if (user) {
-            console.log(user);
+            return user;
         }
+        return false;
+    }
+
+    async getProfile(appetize_id) {
+        var user = await this.get(appetize_id);
+        console.log(user);
+        if (!user) return;
+        var dbClass = await this.db.query_one(
+            "SELECT * FROM classes WHERE id = ?",
+            user.class
+        );
+        if (!dbClass) return;
+        user.class = dbClass;
+        user.restaurant = user.class.restaurant;
+        user.time = user.class.time;
+        var lastForm = await this.db.query_one(
+            "SELECT * FROM forms where user = ? ORDER BY id DESC",
+            user.id
+        );
+
+        return user;
     }
 
     async getAdmin(username, password) {

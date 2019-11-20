@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 
 import 'Restaurant.dart';
 
-String id;
+const String API_ENDPOINT = 'http://10.0.2.2:5050';
+
+String appetizeId = 'APPETIZE_NULL';
 DateTime lastVoteDate = DateTime.now();
 
 Map restaurants = {
@@ -17,12 +19,20 @@ ValueNotifier<String> restaurant = new ValueNotifier<String>('greek');
 // Food rating can be between 0-3 (Worst to best) and is changed by the user via the emojis.
 ValueNotifier<int> foodRating = new ValueNotifier<int>(-1);
 
+ValueNotifier<String> eatTime = new ValueNotifier<String>('-:-');
+ValueNotifier<String> regFood = new ValueNotifier<String>('');
+ValueNotifier<String> vegFood = new ValueNotifier<String>('');
+
 ValueNotifier<String> statusText = new ValueNotifier('Hur var maten idag?');
 // 0 - Failed to deliver RED
 // 1 - Request sent but not recived YELLOW
 // 2 - Request sent and recieved GREEN
 ValueNotifier<int> deliverStatus = new ValueNotifier(1);
 
-ValueNotifier<bool> topCardExpanded = new ValueNotifier(true);
+ValueNotifier<bool> topCardExpanded = new ValueNotifier(false);
+
+ValueNotifier<String> signupStatus = new ValueNotifier('');
+
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 var apiTimeout;

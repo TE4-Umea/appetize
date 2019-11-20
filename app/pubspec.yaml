@@ -53,6 +53,8 @@ flutter:
         - assets/olearys.png
         - assets/splash.flr
         - assets/icon_white.png
+        - assets/icon.png
+        - assets/icon_transparent.png
     # An image asset can refer to one or more resolution-specific "variants", see
     # https://flutter.dev/assets-and-images/#resolution-aware.
     # For details regarding adding assets from package dependencies, see

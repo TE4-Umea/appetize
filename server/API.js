@@ -10,6 +10,47 @@ module.exports = class API {
             this.respond(res);
         });
 
+        app.get("/api/profile", async (req, res) => {
+            var req = this.parseRequest(req);
+            var profile = await User.getProfile(req.id);
+
+            if (!profile) {
+                console.log("Failed login");
+                this.respond(res, false, "Invalid id");
+                return;
+            }
+            console.log("Successfull login");
+            /* var user = await User.get(req.id); */
+            this.respond(res, true, "success", { profile });
+        });
+
+        app.post("/api/signup", async (req, res) => {
+            var req = this.parseRequest(req);
+            var dbCode = await db.query_one(
+                "SELECT * FROM codes WHERE code = ?",
+                req.code
+            );
+            if (!dbCode) {
+                this.respond(res, false, "Ej giltig kod");
+                return;
+            }
+            var codeAge = Date.now() - new Date(dbCode.created).getTime();
+            // If code age is more than one hour, it's not valid.
+            if (codeAge > 1000 * 60 * 60) {
+                this.respond(res, false, "Koden har gått ut.");
+                return;
+            } else {
+                // Valid code.
+                var appetizeID = User.generateToken();
+                await db.query(
+                    "INSERT INTO users (appetize_id, class) VALUES (?, ?)",
+                    [appetizeID, dbCode.class]
+                );
+                this.respond(res, true, "Success", { id: appetizeID });
+                return;
+            }
+        });
+
         // ADMIN API
 
         app.post("/api/login", async (req, res) => {
