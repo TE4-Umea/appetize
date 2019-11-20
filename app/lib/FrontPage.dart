@@ -46,6 +46,7 @@ class FrontPage extends StatelessWidget {
                         padding: EdgeInsets.only(top: 10),
                       ),
                       ComplaintButton(),
+                      ComplaintCard(),
                     ],
                   );
                 },
