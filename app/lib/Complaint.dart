@@ -29,9 +29,9 @@ class ComplaintButtonState extends State<ComplaintButton> {
             height: 50,
             minWidth: MediaQuery.of(context).size.width - 200,
           ),
-          padding: EdgeInsets.all(25),
+          padding: EdgeInsets.all(20),
         ),
-        Text('Ditt klagomål är: ${_complaint}')
+        // Text('Ditt klagomål är: ${_complaint}')
       ],
     ));
   }
