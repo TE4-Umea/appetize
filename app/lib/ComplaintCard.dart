@@ -25,19 +25,23 @@ class _ComplaintCardState extends State<ComplaintCard> {
                             textScaleFactor: 1.5,
                             style: new TextStyle(color: Colors.white),
                           ),
-                          Icon(
-                            Icons.clear,
+                          IconButton(
+                            icon: Icon(Icons.clear),
                             color: Colors.white,
+                            onPressed: () {
+                              print('yee');
+                            },
                           ),
                         ],
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       ),
-                      padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.white),
+                        borderRadius: BorderRadius.circular(4),
+                        color: Colors.white,
+                      ),
                       child: TextField(
                         maxLines: 1,
                         style: new TextStyle(
@@ -59,17 +63,22 @@ class _ComplaintCardState extends State<ComplaintCard> {
               decoration: BoxDecoration(
                 color: globals.restaurants[globals.restaurant.value].darkColor,
                 borderRadius: new BorderRadius.only(
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
                 ),
               ),
             ),
           ],
         ),
         decoration: BoxDecoration(
-          color: globals.restaurants[globals.restaurant.value].color,
-          borderRadius: BorderRadius.all(Radius.circular(15)),
-        ),
+            color: globals.restaurants[globals.restaurant.value].color,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(.4),
+                  blurRadius: 10,
+                  spreadRadius: 2)
+            ]),
       ),
       padding: EdgeInsets.fromLTRB(30, 0, 30, 30),
     );
