@@ -36,7 +36,7 @@ class API {
   static logout() {
     appetizeId = '';
     savePreferences();
-    navigatorKey.currentState.pop();
+    navigatorKey.currentState.pushNamed('/');
   }
 
   static getProfile() async {
@@ -54,6 +54,12 @@ class API {
   }
 
   static signup(code) async {
+    // Temporary backdoor, remove it once we have a server!
+    if (code == '0000') {
+      navigatorKey.currentState.pushNamed('/home');
+      return;
+    }
+
     try {
       var response = await _post('/api/signup', {"code": code});
 
