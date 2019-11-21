@@ -19,40 +19,42 @@ class FrontPage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: backgroundColor,
-        body: GestureDetector(
-          child: Column(
-            // Body
-            children: <Widget>[
-              ValueListenableBuilder(
-                valueListenable: globals.restaurant,
-                builder: (context, value, _) {
-                  return Wrap(
-                    direction: Axis.horizontal,
-                    crossAxisAlignment: WrapCrossAlignment.start,
-                    spacing: 0,
-                    runSpacing: 5,
-                    children: <Widget>[
-                      Padding(
-                        child: TopCard(),
-                        padding: EdgeInsets.only(top: 40),
-                      ),
-                      Padding(
-                        child: FrontPageText(),
-                        padding: EdgeInsets.only(top: 10),
-                      ),
-                      Padding(
-                        child: RateBar(globals.restaurants[value].color),
-                        padding: EdgeInsets.only(top: 10),
-                      ),
-                    ],
-                  );
-                },
-              )
-            ],
+        body: SingleChildScrollView(
+          child: GestureDetector(
+            child: Column(
+              // Body
+              children: <Widget>[
+                ValueListenableBuilder(
+                  valueListenable: globals.restaurant,
+                  builder: (context, value, _) {
+                    return Wrap(
+                      direction: Axis.horizontal,
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      spacing: 0,
+                      runSpacing: 5,
+                      children: <Widget>[
+                        Padding(
+                          child: TopCard(),
+                          padding: EdgeInsets.only(top: 40),
+                        ),
+                        Padding(
+                          child: FrontPageText(),
+                          padding: EdgeInsets.only(top: 10),
+                        ),
+                        Padding(
+                          child: RateBar(globals.restaurants[value].color),
+                          padding: EdgeInsets.only(top: 10),
+                        ),
+                      ],
+                    );
+                  },
+                )
+              ],
+            ),
+            onTap: () {
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
           ),
-          onTap: () {
-            FocusScope.of(context).requestFocus(new FocusNode());
-          },
         ),
       ),
     );
