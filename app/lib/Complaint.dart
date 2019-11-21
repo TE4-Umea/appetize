@@ -11,7 +11,6 @@ const List<String> _complaints = [
   "Lång kö",
   "Maten var inte god",
   "Dåliga tillbehör",
-  "ree"
 ];
 
 class ComplaintButtonState extends State<ComplaintButton> {
@@ -44,10 +43,12 @@ class ComplaintButtonState extends State<ComplaintButton> {
 
   String _complaint = '';
 
-  void addComplaint(String value) {}
+  void addComplaint(String value) {
+    print('Added ' + value);
+  }
 
-  Future<Null> _askuser() async {
-    switch (await showDialog(
+  _askuser() {
+    showDialog(
       context: context,
       child: new SimpleDialog(
         title: new Text('Klagomål / kommentar'),
@@ -55,26 +56,13 @@ class ComplaintButtonState extends State<ComplaintButton> {
           for (String complaint in _complaints)
             SimpleDialogOption(
               onPressed: () {
-                Navigator.pop(context);
+                addComplaint(complaint);
+                globals.navigatorKey.currentState.pop();
               },
               child: Text(complaint),
             ),
         ],
       ),
-    )) {
-      /* 
-      case Complaint.ColdFood:
-        setComplaint('Kall Mat');
-        break;
-      case Complaint.LongLine:
-        setComplaint('Lång Kö');
-        break;
-      case Complaint.NotTasty:
-        setComplaint('Maten var inte god');
-        break;
-      case Complaint.NoSides:
-        setComplaint('Dåliga tillbehör');
-        break; */
-    }
+    );
   }
 }
