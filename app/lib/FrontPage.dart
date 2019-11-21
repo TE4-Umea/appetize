@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:Appetize/API.dart';
+import 'package:Appetize/ComplaintList.dart';
 import 'package:Appetize/FrontPageText.dart';
 import 'package:Appetize/RateBar.dart';
 import 'package:Appetize/ComplaintCard.dart';
@@ -45,6 +46,8 @@ class FrontPage extends StatelessWidget {
                           child: RateBar(globals.restaurants[value].color),
                           padding: EdgeInsets.only(top: 10),
                         ),
+                        ComplaintButton(),
+                        ComplaintList()
                       ],
                     );
                   },

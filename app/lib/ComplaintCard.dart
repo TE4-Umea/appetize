@@ -2,11 +2,23 @@ import 'package:flutter/material.dart';
 import 'globals.dart' as globals;
 
 class ComplaintCard extends StatefulWidget {
+  String complaint;
+
+  ComplaintCard(this.complaint);
+
   @override
   _ComplaintCardState createState() => _ComplaintCardState();
 }
 
 class _ComplaintCardState extends State<ComplaintCard> {
+  TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = new TextEditingController(text: widget.complaint);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,7 +41,8 @@ class _ComplaintCardState extends State<ComplaintCard> {
                             icon: Icon(Icons.clear),
                             color: Colors.white,
                             onPressed: () {
-                              print('yee');
+                              globals.complaints.value.remove(widget.complaint);
+                              globals.complaints.notifyListeners();
                             },
                           ),
                         ],
@@ -44,6 +57,7 @@ class _ComplaintCardState extends State<ComplaintCard> {
                       ),
                       child: TextField(
                         maxLines: 1,
+                        controller: _controller,
                         style: new TextStyle(
                             color: globals
                                 .restaurants[globals.restaurant.value].color,

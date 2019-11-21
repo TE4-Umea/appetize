@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'globals.dart';
+import 'API.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -27,7 +28,9 @@ class SettingsPage extends StatelessWidget {
           Padding(
             child: Center(
               child: MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  API.logout();
+                },
                 color: restaurants[restaurant.value].color,
                 height: 50,
                 minWidth: MediaQuery.of(context).size.width - 10,

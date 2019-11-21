@@ -8,7 +8,7 @@ const String API_ENDPOINT = 'http://10.0.2.2:5050';
 String appetizeId = 'APPETIZE_NULL';
 DateTime lastVoteDate = DateTime.now();
 
-List complaints = [];
+ValueNotifier<List> complaints = ValueNotifier<List>([]);
 
 Map restaurants = {
   'greek': Restaurant('Greek Grill', 'assets/greek.png'),

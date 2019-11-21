@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:Appetize/Preferences.dart';
 import 'package:Appetize/globals.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
 class API {
@@ -36,7 +37,8 @@ class API {
   static logout() {
     appetizeId = '';
     savePreferences();
-    navigatorKey.currentState.pushNamed('/');
+    navigatorKey.currentState
+        .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
   }
 
   static getProfile() async {
@@ -47,7 +49,8 @@ class API {
       eatTime.value = body['profile']['time'];
       restaurant.value = body['profile']['restaurant'];
 
-      navigatorKey.currentState.pushNamed('/home');
+      navigatorKey.currentState
+          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
     } else {
       navigatorKey.currentState.pushNamed('/');
     }
@@ -56,7 +59,8 @@ class API {
   static signup(code) async {
     // Temporary backdoor, remove it once we have a server!
     if (code == '0000') {
-      navigatorKey.currentState.pushNamed('/home');
+      navigatorKey.currentState
+          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
       return;
     }
 

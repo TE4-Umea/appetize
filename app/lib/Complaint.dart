@@ -11,6 +11,8 @@ const List<String> _complaints = [
   "Lång kö",
   "Maten var inte god",
   "Dåliga tillbehör",
+  "Slut på mat",
+  "Egen text"
 ];
 
 class ComplaintButtonState extends State<ComplaintButton> {
@@ -26,7 +28,6 @@ class ComplaintButtonState extends State<ComplaintButton> {
               child: Text('Lägg till klagomål eller kommentar'),
               color: Colors.white,
               onPressed: () {
-                globals.foodRating.value = -1;
                 _askuser();
               },
               textColor: globals.restaurants[globals.restaurant.value].color,
@@ -44,7 +45,9 @@ class ComplaintButtonState extends State<ComplaintButton> {
   String _complaint = '';
 
   void addComplaint(String value) {
-    print('Added ' + value);
+    globals.complaints.value.add(value);
+    globals.complaints.notifyListeners();
+    print(value);
   }
 
   _askuser() {
