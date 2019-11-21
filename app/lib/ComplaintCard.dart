@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'globals.dart' as globals;
 
 class ComplaintCard extends StatefulWidget {
   @override
@@ -10,18 +11,76 @@ class _ComplaintCardState extends State<ComplaintCard> {
   Widget build(BuildContext context) {
     return Padding(
       child: Container(
-        child: Padding(
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), color: Colors.white),
-            child: TextField(maxLines: 2),
-          ),
-          padding: EdgeInsets.all(20),
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: Padding(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            'Kommentar',
+                            textScaleFactor: 1.5,
+                            style: new TextStyle(color: Colors.white),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.clear),
+                            color: Colors.white,
+                            onPressed: () {
+                              print('yee');
+                            },
+                          ),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ),
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: Colors.white,
+                      ),
+                      child: TextField(
+                        maxLines: 1,
+                        style: new TextStyle(
+                            color: globals
+                                .restaurants[globals.restaurant.value].color,
+                            fontSize: 16),
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+              ),
+            ),
+            Container(
+              height: 20,
+              decoration: BoxDecoration(
+                color: globals.restaurants[globals.restaurant.value].darkColor,
+                borderRadius: new BorderRadius.only(
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
+                ),
+              ),
+            ),
+          ],
         ),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: Colors.grey),
+            color: globals.restaurants[globals.restaurant.value].color,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(.4),
+                  blurRadius: 10,
+                  spreadRadius: 2)
+            ]),
       ),
-      padding: EdgeInsets.all(30),
+      padding: EdgeInsets.fromLTRB(30, 0, 30, 30),
     );
   }
 }
