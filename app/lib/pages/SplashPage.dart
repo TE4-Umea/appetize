@@ -10,42 +10,44 @@ class SplashPage extends StatelessWidget {
     return GestureDetector(
       child: Scaffold(
         backgroundColor: backgroundColor,
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  child: Image.asset(
-                    'assets/icon_transparent.png',
-                    width: 200,
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    child: Image.asset(
+                      'assets/icon_transparent.png',
+                      width: 200,
+                    ),
+                    padding: EdgeInsets.only(top: 20),
                   ),
-                  padding: EdgeInsets.only(top: 20),
                 ),
-              ),
-              Padding(
-                child: Text(
-                  'Skriv in din klasskod',
-                  style: TextStyle(fontSize: 20),
+                Padding(
+                  child: Text(
+                    'Skriv in din klasskod',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  padding: EdgeInsets.all(10),
                 ),
-                padding: EdgeInsets.all(10),
-              ),
-              Center(
-                child: CodeInput(),
-              ),
-              Padding(
-                child: ValueListenableBuilder(
-                  builder: (context, value, _) {
-                    return Text(
-                      value,
-                      style: TextStyle(color: Colors.red),
-                    );
-                  },
-                  valueListenable: signupStatus,
+                Center(
+                  child: CodeInput(),
                 ),
-                padding: EdgeInsets.all(20),
-              ),
-            ],
+                Padding(
+                  child: ValueListenableBuilder(
+                    builder: (context, value, _) {
+                      return Text(
+                        value,
+                        style: TextStyle(color: Colors.red),
+                      );
+                    },
+                    valueListenable: signupStatus,
+                  ),
+                  padding: EdgeInsets.all(20),
+                ),
+              ],
+            ),
           ),
         ),
       ),
