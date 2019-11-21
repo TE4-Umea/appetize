@@ -1,18 +1,16 @@
 import 'dart:math';
 
-import 'package:Appetize/Complaint.dart';
-import 'package:Appetize/ComplaintCard.dart';
+import 'package:Appetize/API.dart';
 import 'package:Appetize/FrontPageText.dart';
+import 'package:Appetize/Preferences.dart';
 import 'package:Appetize/RateBar.dart';
 import 'package:Appetize/TopCard.dart';
 import 'package:flutter/material.dart';
 import 'colors.dart';
-import 'RestaurantWidget.dart';
 import 'globals.dart' as globals;
 
 class FrontPage extends StatelessWidget {
-  Map restaurants;
-  FrontPage(this.restaurants);
+  FrontPage();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +45,13 @@ class FrontPage extends StatelessWidget {
                       ),
                       ComplaintButton(),
                       ComplaintCard(),
+                      MaterialButton(
+                        child: Text('LOGGA UT (ENDAST FÖR TEST)'),
+                        color: Colors.white,
+                        onPressed: () {
+                          API.logout();
+                        },
+                      )
                     ],
                   );
                 },

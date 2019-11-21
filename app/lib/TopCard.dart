@@ -22,6 +22,7 @@ class _TopCardState extends State<TopCard> with TickerProviderStateMixin {
     return GestureDetector(
         onTap: () {
           topCardExpanded.value = !topCardExpanded.value;
+          if (vegFood.value.length == 0) topCardExpanded.value = false;
         },
         child: ValueListenableBuilder(
             valueListenable: topCardExpanded,
@@ -72,15 +73,35 @@ class _TopCardState extends State<TopCard> with TickerProviderStateMixin {
                       ),
                     ),
                     Positioned(
-                      child: Container(
-                        child: Text(
-                          '11:20 - Pizza med kött...\nVeg: Margerita',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              eatTime.value +
+                                  (regFood.value.length > 0 ? " - " : "") +
+                                  regFood.value +
+                                  "\n" +
+                                  vegFood.value,
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 18),
+                            ),
+                            Visibility(
+                              child: Padding(
+                                child: Icon(
+                                    value
+                                        ? Icons.expand_less
+                                        : Icons.expand_more,
+                                    color: Colors.white),
+                                padding: EdgeInsets.only(left: 0, bottom: 20),
+                              ),
+                              visible: vegFood.value.length > 0,
+                            )
+                          ],
                         ),
-                        alignment: Alignment.bottomCenter,
-                        width: width - 25,
                       ),
+                      width: width - 25,
                       top: textTop,
                     ),
                   ],
