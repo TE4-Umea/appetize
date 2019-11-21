@@ -1,6 +1,6 @@
-import 'package:Appetize/ComplaintCard.dart';
+import 'package:Appetize/Complaint/ComplaintCard.dart';
 import 'package:flutter/cupertino.dart';
-import 'globals.dart' as globals;
+import 'package:Appetize/globals.dart' as globals;
 
 class ComplaintList extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class _ComplaintListState extends State<ComplaintList> {
         builder: (context, value, _) {
           return Column(
             children: <Widget>[
-              for (var complaint in value) ComplaintCard(complaint)
+              for (var i = 0; i < value.length; i++) ComplaintCard(value[i], i)
             ],
           );
         },

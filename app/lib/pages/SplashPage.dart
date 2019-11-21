@@ -1,7 +1,7 @@
 import 'package:Appetize/colors.dart';
 import 'package:Appetize/globals.dart';
 import 'package:flutter/material.dart';
-import 'API.dart';
+import 'package:Appetize/API.dart';
 
 class SplashPage extends StatelessWidget {
   SplashPage();

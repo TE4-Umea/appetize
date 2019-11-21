@@ -1,6 +1,6 @@
-import 'package:Appetize/FrontPage.dart';
-import 'package:Appetize/SettingsPage.dart';
-import 'package:Appetize/SplashPage.dart';
+import 'package:Appetize/pages/FrontPage.dart';
+import 'package:Appetize/pages/SettingsPage.dart';
+import 'package:Appetize/pages/SplashPage.dart';
 import 'package:Appetize/globals.dart';
 import 'package:flutter/material.dart';
 

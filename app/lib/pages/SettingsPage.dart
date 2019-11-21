@@ -1,10 +1,49 @@
 import 'package:flutter/material.dart';
-import 'globals.dart';
-import 'API.dart';
+import 'package:Appetize/globals.dart';
+import 'package:Appetize/API.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    void _confirmLogout() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Row(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(right: 10),
+                  child: Icon(Icons.warning),
+                ),
+                Text("Logga ut")
+              ],
+            ),
+            content: new Text(
+                "Om du loggar ut behöver du en ny inbjudningskod för att använda appen igen!"),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text(
+                  "Logga ut",
+                  style: TextStyle(color: Colors.red),
+                ),
+                onPressed: () {
+                  API.logout();
+                },
+              ),
+              new FlatButton(
+                child:
+                    new Text("Avbryt", style: TextStyle(color: Colors.black)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -29,7 +68,8 @@ class SettingsPage extends StatelessWidget {
             child: Center(
               child: MaterialButton(
                 onPressed: () {
-                  API.logout();
+                  /* API.logout(); */
+                  _confirmLogout();
                 },
                 color: restaurants[restaurant.value].color,
                 height: 50,

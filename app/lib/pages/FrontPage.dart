@@ -1,15 +1,15 @@
 import 'dart:math';
 
 import 'package:Appetize/API.dart';
-import 'package:Appetize/ComplaintList.dart';
-import 'package:Appetize/FrontPageText.dart';
+import 'package:Appetize/Complaint/ComplaintList.dart';
+import 'package:Appetize/pages/FrontPageText.dart';
 import 'package:Appetize/RateBar.dart';
-import 'package:Appetize/ComplaintCard.dart';
-import 'package:Appetize/Complaint.dart';
+import 'package:Appetize/Complaint/ComplaintCard.dart';
+import 'package:Appetize/Complaint/ComplaintButton.dart';
 import 'package:Appetize/TopCard.dart';
 import 'package:flutter/material.dart';
-import 'colors.dart';
-import 'globals.dart' as globals;
+import 'package:Appetize/colors.dart';
+import 'package:Appetize/globals.dart' as globals;
 
 class FrontPage extends StatelessWidget {
   FrontPage();
