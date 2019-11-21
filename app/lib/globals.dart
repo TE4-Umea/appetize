@@ -1,7 +1,6 @@
 library appetize.globals;
 
 import 'package:flutter/cupertino.dart';
-
 import 'Restaurant.dart';
 
 const String API_ENDPOINT = 'http://10.0.2.2:5050';
@@ -25,7 +24,11 @@ ValueNotifier<String> eatTime = new ValueNotifier<String>('-:-');
 ValueNotifier<String> regFood = new ValueNotifier<String>('');
 ValueNotifier<String> vegFood = new ValueNotifier<String>('');
 
+ValueNotifier<bool> vegetarian = new ValueNotifier<bool>(false);
+ValueNotifier<bool> gluten = new ValueNotifier<bool>(false);
+
 ValueNotifier<String> statusText = new ValueNotifier('Hur var maten idag?');
+
 // 0 - Failed to deliver RED
 // 1 - Request sent but not recived YELLOW
 // 2 - Request sent and recieved GREEN

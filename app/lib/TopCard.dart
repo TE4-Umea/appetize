@@ -110,7 +110,9 @@ class _TopCardState extends State<TopCard> with TickerProviderStateMixin {
                             Icons.settings,
                             size: 35,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            navigatorKey.currentState.pushNamed('/settings');
+                          },
                           elevation: 0,
                           backgroundColor:
                               restaurants[restaurant.value].darkColor),

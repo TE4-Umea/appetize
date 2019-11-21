@@ -1,4 +1,5 @@
 import 'package:Appetize/FrontPage.dart';
+import 'package:Appetize/SettingsPage.dart';
 import 'package:Appetize/SplashPage.dart';
 import 'package:Appetize/globals.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,8 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => SplashPage(),
-        '/home': (context) => FrontPage()
+        '/home': (context) => FrontPage(),
+        '/settings': (context) => SettingsPage(),
       },
     );
   }
