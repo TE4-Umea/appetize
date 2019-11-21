@@ -22,15 +22,20 @@ class _ComplaintCardState extends State<ComplaintCard> {
                         children: <Widget>[
                           Text(
                             'Kommentar',
-                            textScaleFactor: 1.5,
+                            textScaleFactor: 1,
                             style: new TextStyle(color: Colors.white),
                           ),
-                          IconButton(
-                            icon: Icon(Icons.clear),
-                            color: Colors.white,
-                            onPressed: () {
-                              print('yee');
-                            },
+                          SizedBox(
+                            height: 35.0,
+                            width: 35.0,
+                            child: IconButton(
+                              padding: new EdgeInsets.all(0.0),
+                              color: Colors.white,
+                              icon: new Icon(Icons.clear, size: 20),
+                              onPressed: () {
+                                print('yee');
+                              },
+                            ),
                           ),
                         ],
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,11 +48,11 @@ class _ComplaintCardState extends State<ComplaintCard> {
                         color: Colors.white,
                       ),
                       child: TextField(
-                        maxLines: 1,
                         style: new TextStyle(
                             color: globals
                                 .restaurants[globals.restaurant.value].color,
-                            fontSize: 16),
+                            fontSize: 16,
+                            height: 0.75),
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
@@ -55,11 +60,11 @@ class _ComplaintCardState extends State<ComplaintCard> {
                     ),
                   ],
                 ),
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 5),
               ),
             ),
             Container(
-              height: 20,
+              height: 8,
               decoration: BoxDecoration(
                 color: globals.restaurants[globals.restaurant.value].darkColor,
                 borderRadius: new BorderRadius.only(
@@ -75,8 +80,8 @@ class _ComplaintCardState extends State<ComplaintCard> {
             borderRadius: BorderRadius.all(Radius.circular(10)),
             boxShadow: [
               BoxShadow(
-                  color: Colors.black.withOpacity(.4),
-                  blurRadius: 10,
+                  color: Colors.black.withOpacity(.2),
+                  blurRadius: 8,
                   spreadRadius: 2)
             ]),
       ),
