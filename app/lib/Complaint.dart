@@ -6,7 +6,13 @@ class ComplaintButton extends StatefulWidget {
   ComplaintButtonState createState() => ComplaintButtonState();
 }
 
-enum Complaint { ColdFood, LongLine, NotTasty, NoSides }
+const List<String> _complaints = [
+  "Kall mat",
+  "Lång kö",
+  "Maten var inte god",
+  "Dåliga tillbehör",
+  "ree"
+];
 
 class ComplaintButtonState extends State<ComplaintButton> {
   @override
@@ -38,11 +44,7 @@ class ComplaintButtonState extends State<ComplaintButton> {
 
   String _complaint = '';
 
-  void setComplaint(String value) {
-    setState(() {
-      _complaint = value;
-    });
-  }
+  void addComplaint(String value) {}
 
   Future<Null> _askuser() async {
     switch (await showDialog(
@@ -50,33 +52,17 @@ class ComplaintButtonState extends State<ComplaintButton> {
       child: new SimpleDialog(
         title: new Text('Klagomål / kommentar'),
         children: <Widget>[
-          new SimpleDialogOption(
-            onPressed: () {
-              Navigator.pop(context, Complaint.ColdFood);
-            },
-            child: const Text('Kall Mat'),
-          ),
-          new SimpleDialogOption(
-            onPressed: () {
-              Navigator.pop(context, Complaint.LongLine);
-            },
-            child: const Text('Lång Kö'),
-          ),
-          new SimpleDialogOption(
-            onPressed: () {
-              Navigator.pop(context, Complaint.NotTasty);
-            },
-            child: const Text('Maten var inte god'),
-          ),
-          new SimpleDialogOption(
-            onPressed: () {
-              Navigator.pop(context, Complaint.NoSides);
-            },
-            child: const Text('Dåliga tillbehör'),
-          ),
+          for (String complaint in _complaints)
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(complaint),
+            ),
         ],
       ),
     )) {
+      /* 
       case Complaint.ColdFood:
         setComplaint('Kall Mat');
         break;
@@ -88,7 +74,7 @@ class ComplaintButtonState extends State<ComplaintButton> {
         break;
       case Complaint.NoSides:
         setComplaint('Dåliga tillbehör');
-        break;
+        break; */
     }
   }
 }
