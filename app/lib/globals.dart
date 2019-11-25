@@ -2,6 +2,7 @@ library appetize.globals;
 
 import 'package:flutter/cupertino.dart';
 import 'Restaurant.dart';
+import 'package:flutter/material.dart';
 
 const String API_ENDPOINT = 'http://10.0.2.2:5050';
 
@@ -15,6 +16,13 @@ Map restaurants = {
   'olearys': Restaurant("O'learys", 'assets/olearys.png'),
 };
 
+List smileyColors = [
+  Colors.red,
+  Colors.orange,
+  Colors.lightGreen[400],
+  Colors.green
+];
+
 // Choosen restaurant is changed by clicking the big buttons uptop, theming is determined by this variable.
 ValueNotifier<String> restaurant = new ValueNotifier<String>('greek');
 // Food rating can be between 0-3 (Worst to best) and is changed by the user via the emojis.
@@ -23,6 +31,8 @@ ValueNotifier<int> foodRating = new ValueNotifier<int>(-1);
 ValueNotifier<String> eatTime = new ValueNotifier<String>('-:-');
 ValueNotifier<String> regFood = new ValueNotifier<String>('');
 ValueNotifier<String> vegFood = new ValueNotifier<String>('');
+
+ValueNotifier<bool> notifiedStaff = new ValueNotifier<bool>(false);
 
 ValueNotifier<bool> vegetarian = new ValueNotifier<bool>(false);
 ValueNotifier<bool> gluten = new ValueNotifier<bool>(false);

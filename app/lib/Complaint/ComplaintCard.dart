@@ -17,71 +17,43 @@ class _ComplaintCardState extends State<ComplaintCard> {
   @override
   void initState() {
     super.initState();
-    _controller = new TextEditingController(text: widget.complaint);
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       child: Container(
+        width: MediaQuery.of(context).size.width,
         child: Column(
           children: <Widget>[
             Container(
               child: Padding(
-                child: Column(
+                child: Row(
                   children: <Widget>[
                     Padding(
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            'Kommentar',
-                            textScaleFactor: 1,
-                            style: new TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 35.0,
-                            width: 35.0,
-                            child: IconButton(
-                              padding: new EdgeInsets.all(0.0),
-                              color: Colors.white,
-                              icon: new Icon(Icons.clear, size: 20),
-                              onPressed: () {
-                                print(widget.complaint);
-                                // FIXME:?????????
-                                //????????????????????
-                                //?????????????????????????
-                                globals.complaints.value
-                                    .remove(widget.complaint);
-                                globals.complaints.notifyListeners();
-                              },
-                            ),
-                          ),
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      ),
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: Colors.white,
-                      ),
-                      child: TextField(
-                        controller: _controller,
-                        autofocus: widget.complaint.length == 0,
-                        onChanged: (value) {
-                          globals.complaints.value[widget.index] = value;
-                          print(globals.complaints.value.toString());
-                        },
-                        style: new TextStyle(
-                            color: globals
-                                .restaurants[globals.restaurant.value].color,
-                            fontSize: 16,
-                            height: 0.75),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
+                      child: IconButton(
+                        padding: new EdgeInsets.all(5),
+                        color: Colors.red,
+                        icon: new Icon(
+                          Icons.clear,
+                          size: 25,
                         ),
+                        onPressed: () {
+                          // Delete from array
+                          globals.complaints.value.removeAt(widget.index);
+                          globals.complaints.notifyListeners();
+                        },
                       ),
+                      padding: EdgeInsets.only(right: 5, top: 9),
+                    ),
+                    Padding(
+                      child: Text(
+                        /* controller: _controller, */
+                        widget.complaint,
+                        style: new TextStyle(
+                            color: Colors.black, fontSize: 18, height: .5),
+                      ),
+                      padding: EdgeInsets.only(top: 15),
                     ),
                   ],
                 ),
@@ -91,13 +63,13 @@ class _ComplaintCardState extends State<ComplaintCard> {
           ],
         ),
         decoration: BoxDecoration(
-            color: globals.restaurants[globals.restaurant.value].color,
+            color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(10)),
             boxShadow: [
               BoxShadow(
-                  color: Colors.black.withOpacity(.2),
-                  blurRadius: 8,
-                  spreadRadius: 2)
+                  color: Colors.black.withOpacity(.1),
+                  blurRadius: 10,
+                  spreadRadius: 1)
             ]),
       ),
       padding: EdgeInsets.fromLTRB(30, 0, 30, 10),

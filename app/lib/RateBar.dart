@@ -51,13 +51,6 @@ class Smiley extends StatefulWidget {
     Icons.sentiment_very_satisfied
   ];
 
-  List colors = [
-    Colors.red,
-    Colors.orange,
-    Colors.lightGreen[400],
-    Colors.green
-  ];
-
   Color color;
 
   Smiley(this.value, this.color);
@@ -82,7 +75,7 @@ class _SmileyState extends State<Smiley> {
                   color: value == -1
                       ? widget.color
                       : (value == widget.value
-                          ? widget.colors[widget.value]
+                          ? globals.smileyColors[widget.value]
                           : Colors.grey[800]),
                   size: width,
                 ),
