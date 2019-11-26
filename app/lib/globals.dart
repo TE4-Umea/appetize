@@ -4,6 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'Restaurant.dart';
 import 'package:flutter/material.dart';
 
+// ONLINE
+//const String API_ENDPOINT = 'https://appetize.umea-ntig.se';
+// LOCAL
 const String API_ENDPOINT = 'http://10.0.2.2:5050';
 
 String appetizeId = 'APPETIZE_NULL';

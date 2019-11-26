@@ -57,6 +57,59 @@ class ComplaintButtonState extends State<ComplaintButton> {
       );
     }
 
+    void _alertExeedAmountOfComplaints() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Row(
+              children: <Widget>[
+                Icon(Icons.warning, color: Colors.red),
+              ],
+            ),
+            content: new Text(
+                "Du kan max skicka in fem klagomål per dag, ta bort tidigare klagomål om du vill lägga till fler."),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("OK", style: TextStyle(color: Colors.black)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    void _alertToRate() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Row(
+              children: <Widget>[
+                Icon(Icons.sentiment_very_satisfied, color: Colors.black),
+                Icon(Icons.sentiment_satisfied, color: Colors.black),
+                Icon(Icons.sentiment_neutral, color: Colors.black),
+                Icon(Icons.sentiment_dissatisfied, color: Colors.black),
+              ],
+            ),
+            content: new Text(
+                "Välj först va du tyckte om maten innan du läger till en kommentar"),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("OK", style: TextStyle(color: Colors.black)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     void addComplaint(String value) {
       globals.navigatorKey.currentState.pop();
 
@@ -159,7 +212,14 @@ class ComplaintButtonState extends State<ComplaintButton> {
                           child: Text('Lägg till kommentar'),
                           color: null,
                           onPressed: () {
-                            _askuser();
+                            if (globals.complaints.value.length == 5) {
+                              _alertExeedAmountOfComplaints();
+                              return;
+                            }
+                            if (globals.foodRating.value == -1)
+                              _alertToRate();
+                            else
+                              _askuser();
                           },
                           textColor: value != -1
                               ? globals.smileyColors[value]
