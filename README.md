@@ -2,18 +2,40 @@
 
 ## Appetize, School-food feedback app
 
+![](assets/screenshots-for-readme.png)
+
+# Links
+
+Planning board https://github.com/te4umea2019/appetize/projects/1
+
+Admin site and API https://appetize.umea-ntig.se/
+
 # Installation and setup
 
-### Prerequisites
+## Server installation
+
+Prerequisites
 
 -   NodeJS
 -   MySQL
 
-1. Clone this project `git clone https://github.com/te4umea2019/appetize`
-1. Install packages, `npm i`
-1. Import database `mysql -u username < appetize.sql`
+1. Clone this project `git clone https://github.com/te4umea2019/appetize && cd appetize`
 1. Configure `config.json`
-1. Start the project `cd server && node index.js`
+1. Import database `mysql -u username < appetize.sql`
+1. Install packages `cd server && npm i`
+1. Start the project `node index.js`
+
+## Build for IOS
+
+Prerequisites
+
+-   An apple computer running macOS 14
+-   Flutter
+-   Xcode
+
+1. Clone this project `git clone https://github.com/te4umea2019/appetize && cd appetize`
+1. Run `open app/ios/Runner.xcworkspace`
+1. Configure the build in xcode and run!
 
 # Systems description
 
