@@ -1,0 +1,30 @@
+{
+  "name": "appetize",
+  "version": "1.0.0",
+  "description": "Food rating app backend",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "file-system": "^2.2.2",
+    "http": "^0.0.0",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/te4umea2019/appetize.git"
+  },
+  "author": "NTI TE4 2019",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/te4umea2019/appetize/issues"
+  },
+  "homepage": "https://github.com/te4umea2019/appetize#readme"
+}
