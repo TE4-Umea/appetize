@@ -1,3 +1,4 @@
+import 'package:Appetize/Preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:Appetize/globals.dart';
 import 'package:Appetize/API.dart';
@@ -114,6 +115,7 @@ class _SettingsListState extends State<SettingsList> {
                         value: value,
                         onChanged: (val) {
                           vegetarian.value = val;
+                          savePreferences();
                         },
                       );
                     },
@@ -129,6 +131,7 @@ class _SettingsListState extends State<SettingsList> {
                         value: value,
                         onChanged: (val) {
                           gluten.value = val;
+                          savePreferences();
                         },
                       );
                     },

@@ -1,3 +1,4 @@
+import 'package:Appetize/API.dart';
 import 'package:flutter/material.dart';
 import '../globals.dart' as globals;
 
@@ -41,6 +42,7 @@ class ComplaintButtonState extends State<ComplaintButton> {
                 ),
                 onPressed: () {
                   globals.notifiedStaff.value = true;
+                  API.submitProfile();
                   Navigator.of(context).pop();
                 },
               ),
@@ -48,6 +50,7 @@ class ComplaintButtonState extends State<ComplaintButton> {
                 child: new Text("Nej", style: TextStyle(color: Colors.black)),
                 onPressed: () {
                   globals.notifiedStaff.value = false;
+                  API.submitProfile();
                   Navigator.of(context).pop();
                 },
               ),
@@ -122,6 +125,7 @@ class ComplaintButtonState extends State<ComplaintButton> {
 
       if (globals.complaints.value.length == 1 && !globals.notifiedStaff.value)
         _askIfHasNotifiedStaff();
+      API.submitProfile();
     }
 
     void _writeCustomComplaint() {
@@ -208,7 +212,6 @@ class ComplaintButtonState extends State<ComplaintButton> {
                     return Row(
                       children: <Widget>[
                         FlatButton(
-                          /* elevation: 2, */
                           child: Text('Lägg till kommentar'),
                           color: null,
                           onPressed: () {
@@ -221,10 +224,8 @@ class ComplaintButtonState extends State<ComplaintButton> {
                             else
                               _askuser();
                           },
-                          textColor: value != -1
-                              ? globals.smileyColors[value]
-                              : globals
-                                  .restaurants[globals.restaurant.value].color,
+                          textColor: globals
+                              .restaurants[globals.restaurant.value].darkColor,
                         ),
                         ValueListenableBuilder(
                           builder: (context, value, _) {

@@ -20,7 +20,7 @@ module.exports = class Routes {
 
     async getProfile(appetize_id) {
         var user = await this.get(appetize_id);
-        console.log(user);
+
         if (!user) return;
         var dbClass = await this.db.query_one(
             "SELECT * FROM classes WHERE id = ?",

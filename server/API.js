@@ -7,6 +7,8 @@ module.exports = class API {
         app.post("/api/profile", async (req, res) => {
             var req = this.parseRequest(req);
             var user = await User.get(req.id);
+
+            console.log("New forum update", req);
             this.respond(res);
         });
 
@@ -15,11 +17,10 @@ module.exports = class API {
             var profile = await User.getProfile(req.id);
 
             if (!profile) {
-                console.log("Failed login");
                 this.respond(res, false, "Invalid id");
                 return;
             }
-            console.log("Successfull login");
+
             /* var user = await User.get(req.id); */
             this.respond(res, true, "success", { profile });
         });

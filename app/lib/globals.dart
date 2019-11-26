@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 const String API_ENDPOINT = 'http://10.0.2.2:5050';
 
 String appetizeId = 'APPETIZE_NULL';
-DateTime lastVoteDate = DateTime.now();
 
 ValueNotifier<List> complaints = ValueNotifier<List>([]);
 
@@ -25,6 +24,8 @@ List smileyColors = [
   Colors.lightGreen[400],
   Colors.green
 ];
+
+bool loggedIn = false;
 
 // Choosen restaurant is changed by clicking the big buttons uptop, theming is determined by this variable.
 ValueNotifier<String> restaurant = new ValueNotifier<String>('greek');

@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:Appetize/Preferences.dart';
 import 'package:Appetize/globals.dart';
+import 'package:Appetize/globals.dart' as prefix0;
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 
@@ -19,22 +20,30 @@ class API {
 
   static submitProfile() async {
     statusText.value = 'Tack för din feedback!';
-
-    apiTimeout = Timer(Duration(seconds: 1), () {
+    deliverStatus.value = 1;
+    apiTimeout = Timer(Duration(seconds: 3), () {
       if (deliverStatus.value == 1) deliverStatus.value = 0;
     });
 
     try {
-      await _post(
-          '/api/profile', {"id": "APPETIZE_0", "vote": foodRating.value});
+      await _post('/api/profile', {
+        "id": appetizeId,
+        "vote": foodRating.value,
+        "comments": complaints.value,
+        "notified_staff": notifiedStaff.value,
+        "special": {
+          "veg": vegetarian.value,
+          "gluten": gluten.value,
+        },
+      });
       apiTimeout.cancel();
       deliverStatus.value = 2;
-    } catch (_) {
-      deliverStatus.value = 0;
-    }
+    } catch (_) {}
+    getProfile();
   }
 
   static logout() {
+    loggedIn = false;
     appetizeId = '';
     savePreferences();
     navigatorKey.currentState
@@ -49,21 +58,16 @@ class API {
       eatTime.value = body['profile']['time'];
       restaurant.value = body['profile']['restaurant'];
 
-      navigatorKey.currentState
-          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+      if (!loggedIn)
+        navigatorKey.currentState
+            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+      loggedIn = true;
     } else {
       navigatorKey.currentState.pushNamed('/');
     }
   }
 
   static signup(code) async {
-    // Temporary backdoor, remove it once we have a server!
-    if (code == '0000') {
-      navigatorKey.currentState
-          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-      return;
-    }
-
     try {
       var response = await _post('/api/signup', {"code": code});
 
@@ -73,6 +77,8 @@ class API {
         appetizeId = res["id"];
         await savePreferences();
         getProfile();
+        /* navigatorKey.currentState
+            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false); */
         //navigatorKey.currentState.pushNamed('/home');
       } else {
         signupStatus.value = res["text"];

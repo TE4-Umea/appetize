@@ -1,3 +1,4 @@
+import 'package:Appetize/API.dart';
 import 'package:flutter/material.dart';
 import 'package:Appetize/globals.dart' as globals;
 
@@ -42,6 +43,7 @@ class _ComplaintCardState extends State<ComplaintCard> {
                           // Delete from array
                           globals.complaints.value.removeAt(widget.index);
                           globals.complaints.notifyListeners();
+                          API.submitProfile();
                         },
                       ),
                       padding: EdgeInsets.only(right: 5, top: 9),
