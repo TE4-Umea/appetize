@@ -82,8 +82,8 @@ RESPONSE {
         "comments": ["Kall mat", "Lång kö"],
         "messages": [
             {
-                content: "Message content goes here",
-                id: 9842384732
+                "content": "Message content goes here",
+                "id": 9842384732
             }
         ]
     }
