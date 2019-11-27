@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:Appetize/globals.dart';
 import 'package:Appetize/API.dart';
 
-class SettingsPage extends StatelessWidget {
+class MorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void _confirmLogout() {
@@ -55,7 +55,7 @@ class SettingsPage extends StatelessWidget {
               'assets/icon_white.png',
               height: 40,
             ),
-            Text('Inställningar')
+            Text('Extra')
           ],
         ),
       ),

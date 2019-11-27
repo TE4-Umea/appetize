@@ -1,5 +1,5 @@
 import 'package:Appetize/pages/FrontPage.dart';
-import 'package:Appetize/pages/SettingsPage.dart';
+import 'package:Appetize/pages/MorePage.dart';
 import 'package:Appetize/pages/SplashPage.dart';
 import 'package:Appetize/globals.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class App extends StatelessWidget {
       routes: {
         '/': (context) => SplashPage(),
         '/home': (context) => FrontPage(),
-        '/settings': (context) => SettingsPage(),
+        '/settings': (context) => MorePage(),
       },
     );
   }

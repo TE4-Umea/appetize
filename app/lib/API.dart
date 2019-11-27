@@ -57,6 +57,13 @@ class API {
     if (body['success']) {
       eatTime.value = body['profile']['time'];
       restaurant.value = body['profile']['restaurant'];
+      if (body['profile']['hasForm']) {
+        deliverStatus.value = 2;
+        foodRating.value = body['form']['rating'];
+        complaints.value = body['form']['comments'];
+        /* notifiedStaff.value = body['form'][''] */
+      }
+      print(body.toString());
 
       if (!loggedIn)
         navigatorKey.currentState

@@ -3,29 +3,105 @@ module.exports = class API {
         const User = new (require("./User"))(config);
         const db = new (require("./Database"))(config);
 
-        // APP API
-        app.post("/api/profile", async (req, res) => {
-            var req = this.parseRequest(req);
-            var user = await User.get(req.id);
-
+        async function getTodaysForm(user_id) {
             var today = new Date();
-
             var form = await db.query_one(
                 "SELECT * FROM forms WHERE day = ? AND user = ?",
                 [
                     `${today.getFullYear()}-${today.getMonth() +
                         1}-${today.getDate()}`,
-                    user.id
+                    user_id
                 ]
             );
+            form.comments = JSON.parse(form.comments);
+            return form;
+        }
 
-            if (!form) {
-                await db.query("INSERT into forms");
+        // APP API
+        app.post("/api/profile", async (req, res) => {
+            var req = this.parseRequest(req);
+            var user = await User.get(req.id);
+            var initialSubmission = false;
+
+            if (!user) {
+                this.respond(res, false);
+                return;
             }
 
-            console.log(form);
-            console.log("New forum update", req);
+            // See if form exists today for this user.
+            var form = await getTodaysForm(user.id);
 
+            if (!form) {
+                initialSubmission = true;
+                // Form does not exist so create it and then retreive it.
+                await db.query(
+                    "INSERT into forms (day, rating, comments, user) VALUES (?, 0, '[]', ?)",
+                    [new Date(), user.id]
+                );
+
+                form = await getTodaysForm(user.id);
+            }
+
+            if (!form) {
+                this.respond(res, false);
+                return;
+            }
+
+            // Validate input
+            if ((req.vote > 3 || req.vote < 0) && typeof req.vote == "number") {
+                this.respond(res, false);
+                return;
+            }
+
+            // Ammount of comments can not exceed 5
+            if (typeof req.comments == "object" && req.comments.length > 5) {
+                this.respond(res, false);
+                return;
+            }
+
+            if (!req.special) {
+                this.respond(res, false);
+                return;
+            }
+
+            if (typeof req.notified_staff != "boolean") {
+                this.respond(res, false);
+                return;
+            }
+
+            if (
+                typeof req.special.gluten != "boolean" &&
+                typeof req.special.veg != "boolean"
+            ) {
+                this.respond(res, false);
+                return;
+            }
+
+            // Make sure length of each comment is under 25 characters.
+            for (var comment of req.comments) {
+                if (comment.length > 25) {
+                    this.respond(res, false);
+                    return;
+                }
+            }
+
+            await db.query(
+                "UPDATE users SET gluten = ?, veg = ? WHERE id = ?",
+                [req.special.gluten, req.special.veg, user.id]
+            );
+
+            await db.query(
+                "UPDATE forms SET rating = ?, comments = ? WHERE id = ?",
+                [req.vote, JSON.stringify(req.comments), form.id]
+            );
+
+            console.log(req);
+
+            console.log(
+                `[${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}] Food rating ${
+                    initialSubmission ? "created" : "updated"
+                } by student (${req.vote}/3)`
+            );
             this.respond(res);
         });
 
@@ -38,8 +114,10 @@ module.exports = class API {
                 return;
             }
 
+            var form = await getTodaysForm(profile.id);
+            profile.hasForm = form ? true : false;
             /* var user = await User.get(req.id); */
-            this.respond(res, true, "success", { profile });
+            this.respond(res, true, "success", { profile, form });
         });
 
         app.post("/api/signup", async (req, res) => {
