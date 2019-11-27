@@ -54,14 +54,6 @@ class _TopCardState extends State<TopCard> with TickerProviderStateMixin {
                           color: restaurants[restaurant.value].color),
                       child: Stack(
                         children: <Widget>[
-                          /* Positioned(
-                            child: Image.asset(
-                              'assets/icon_white.png',
-                              width: iconWidth,
-                            ),
-                            top: iconTop,
-                            left: 12,
-                          ), */
                           Align(
                             alignment: Alignment.center,
                             child: Image.asset(
@@ -107,7 +99,7 @@ class _TopCardState extends State<TopCard> with TickerProviderStateMixin {
                     Positioned(
                       child: FloatingActionButton(
                           child: Icon(
-                            Icons.settings,
+                            Icons.menu,
                             size: 35,
                           ),
                           onPressed: () {

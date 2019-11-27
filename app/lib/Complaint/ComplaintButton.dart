@@ -139,6 +139,7 @@ class ComplaintButtonState extends State<ComplaintButton> {
               child: TextField(
                 autofocus: true,
                 decoration: InputDecoration(hintText: "Kommentar..."),
+                maxLength: 25,
                 onChanged: (value) {
                   _customComplaint = value;
                 },

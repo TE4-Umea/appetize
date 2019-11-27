@@ -8,7 +8,24 @@ module.exports = class API {
             var req = this.parseRequest(req);
             var user = await User.get(req.id);
 
+            var today = new Date();
+
+            var form = await db.query_one(
+                "SELECT * FROM forms WHERE day = ? AND user = ?",
+                [
+                    `${today.getFullYear()}-${today.getMonth() +
+                        1}-${today.getDate()}`,
+                    user.id
+                ]
+            );
+
+            if (!form) {
+                await db.query("INSERT into forms");
+            }
+
+            console.log(form);
             console.log("New forum update", req);
+
             this.respond(res);
         });
 
