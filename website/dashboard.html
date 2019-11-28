@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link rel="stylesheet" href="./css/main.css">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="js/progressbar.min.js"></script>
 </head>
 
 <body onload="updateDashboard();">
@@ -20,6 +22,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-md-auto col-5 justify-content-between">
+				<img src="img/icon_white.png" height="60" alt="icon">
 				<li class="nav-item my-2">
 					<a href="./dashboard.html" class="nav-link" id="overview">Överblick</a>
 				</li>
@@ -44,7 +47,7 @@
 					</div>
 				</li>
 				<li class="nav-item my-2">
-					<a href="./comments.html" class="nav-link" id="comments">Se alla kommentarer</a>
+					<a href="./comments.html" class="nav-link" id="comments">Kommentarer</a>
 				</li>
 				<li class="nav-item my-2">
 					<a href="" class="nav-link" id="classes">Klasser</a>
@@ -53,7 +56,12 @@
 			<ul class="navbar-nav ml-auto justify-content-right">
 				<li class="nav-item">
 					<a href="#" class="nav-link" id="logout">
-						<img src="./img/logout.png" style="width: 100%; max-width: 24px;" alt="Logout">
+						<svg xmlns="http://www.w3.org/2000/svg" style="fill:#ed1535;width: 100%; max-width: 30px;"
+							alt="Logout" width="30" height="30" viewBox="0 0 24 24">
+							<path d="M0 0h24v24H0z" fill="none" />
+							<path
+								d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
+						</svg>
 					</a>
 				</li>
 			</ul>
@@ -68,47 +76,55 @@
 	<div class="container justify-content-center">
 		<div class="row col-12 mt-3">
 			<div class="d-flex flex-column mr-3">
-				<img class="mb-0" src="img/POG.png" width="200" height="200">
+				<div id="score-meter" style="height: 100;width: 150px;margin-top: -10px;">
+					<span class="score"
+						style="margin: 0 auto; display: block; position: relative;text-align: center;top:115px;font-size: 60px;">
+						9
+						<span style="font-size: 39px;margin-left: -15px;">.2</span></span>
+				</div>
+
 				<p class="mt-0 mb-1 text-center">Idag(10)</p>
 			</div>
 			<div class="d-flex flex-column">
-				<div class="d-flex flex-row ml-3 mb-0 justify-content-between">
+				<div class="d-flex flex-row ml-3 mb-0 justify-content-between align-items-start">
 					<div>
 						<h2>O'Learys</h2>
 						<span class="class-statistics">4 Klasser, 50 elever</span>
 					</div>
-					<a class="d-flex comment-link align-items-center" href="comments.html">Kommentarer</a>
+					<button type="button" class="btn btn-primary">Se kommentarer</button>
 				</div>
 				<div class="chart-placeholder">
 					<div class="googleChart"></div>
 				</div>
 				<div class="d-flex flex-row">
-					<div class="d-flex flex-row">
-						<button class="diet-selector">Alla</button>
-						<button class="diet-selector">Veg</button>
-						<button class="diet-selector">Gluten</button>
-						<button class="diet-selector">Vanlig</button>
+					<div class="d-flex flex-row" style="margin-top: 20px;">
+						<button class="diet-selector btn btn-primary">Alla</button>
+						<button class="diet-selector btn btn-outline-primary">Veg</button>
+						<button class=" diet-selector btn btn-outline-primary">Gluten</button>
+						<button class="diet-selector btn btn-outline-primary">Vanlig</button>
+						<div class="dropdown">
+							<button class="diet-selector btn btn-primary dropdown-toggle" type="button"
+								id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Klass: Alla klasser
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<a class="dropdown-item" href="#!">Alla klasser</a>
+								<a class="dropdown-item" href="#!">TE17</a>
+								<a class="dropdown-item" href="#!">TE17</a>
+								<a class="dropdown-item" href="#!">TE17</a>
+								<a class="dropdown-item" href="#!">TE17</a>
+								<a class="dropdown-item" href="#!">TE17</a>
+								<a class="dropdown-item" href="#!">TE17</a>
+
+							</div>
+						</div>
 					</div>
-					<div class="">
-						
+					<div class="d-flex flex-row justify-content-center flex-grow-1">
+
+
+
 					</div>
-				</div>
-			</div>
-		</div>
-		<div class="separator"></div>
-		<div class="row col-12">
-			<div class="d-flex flex-column">
-				<img class="mb-0" src="img/POG.png" width="200" height="200">
-				<p class="mt-0 mb-1 text-center">Idag(10)</p>
-				<button>Kommentarer</button>
-			</div>
-			<div class="d-flex flex-column">
-				<div class="ml-3 mb-0">
-					<h2>O'Learys</h2>
-					<span>4 Klasser, 50 elever</span>
-				</div>
-				<div class="row">
-					<div id="chart" class="googleChart"></div>
+
 				</div>
 			</div>
 		</div>

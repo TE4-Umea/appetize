@@ -50,22 +50,17 @@ function updateDashboard() {
         ]
     };
 
-    google.charts.load('current', { packages: ['corechart', 'line'] });
+    google.charts.load("current", { packages: ["corechart", "line"] });
     google.charts.setOnLoadCallback(drawBasic);
 
     function drawBasic() {
-
         var data = new google.visualization.DataTable();
-        data.addColumn('number', 'Datum');
-        data.addColumn('number', 'Betyg');
+        data.addColumn("number", "Datum");
+        data.addColumn("number", "Betyg");
 
         data.addRows([
-            [0, 0], [1, 10], [2, 23], [3, 17], [4, 18], [5, 9],
-            [6, 11], [7, 27], [8, 33], [9, 40], [10, 32], [11, 35],
-            [12, 30], [13, 40], [14, 42], [15, 47], [16, 44], [17, 48],
-            [18, 52], [19, 54], [20, 42], [21, 55], [22, 56], [23, 57],
-            [24, 60], [25, 50], [26, 52], [27, 51], [28, 49], [29, 53],
-            [30, 55]
+            [0, 0],
+            [1, 10]
         ]);
 
         var options = {
@@ -76,21 +71,31 @@ function updateDashboard() {
                     fontSize: 14
                 }
             },
-            legend: 'none',
-            chartArea: {
-                left: '5%',
-                top: '5%',
-                width: '85%',
-                height: '85%',
-            }
 
+            legend: "none",
+            chartArea: {
+                left: "5%",
+                top: "5%",
+                width: "85%",
+                height: "85%"
+            }
         };
 
-        let charts = document.getElementsByClassName('googleChart');
+        let charts = document.getElementsByClassName("googleChart");
         for (let i = 0; i < charts.length; i++) {
             let chart = new google.visualization.LineChart(charts[i]);
             chart.draw(data, options);
         }
     }
-}
 
+    var bar = new ProgressBar.Circle(document.getElementById("score-meter"), {
+        strokeWidth: 10,
+        easing: "easeInOut",
+        duration: 1000,
+        color: "#29e357",
+        trailColor: "none",
+        trailWidth: 0
+    });
+
+    bar.animate(0.87); // Number from 0.0 to 1.0
+}
