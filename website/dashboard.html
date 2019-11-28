@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="./css/main.css">
 </head>
 
-<body>
+<body onload="updateDashboard();">
 	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,22 +66,53 @@
 
 
 	<div class="container justify-content-center">
-		<div class="col-8">
-			<div class="row mt-5 mb-3">
-				<h1>Dagens Lunch</h1>
+		<div class="row col-12 mt-3">
+			<div class="d-flex flex-column mr-3">
+				<img class="mb-0" src="img/POG.png" width="200" height="200">
+				<p class="mt-0 mb-1 text-center">Idag(10)</p>
 			</div>
-			<div class="row w-100">
-				<div class="col-6"><canvas id="olearysToday"></canvas></div>
-				<div class="col-6"><canvas id="greekToday"></canvas></div>
-			</div>
-			<div class="row mt-5">
-				<h1>Senaste Dagarna</h1>
-			</div>
-			<div class="row w-100">
-				<div class="col-6"><canvas id="olearysLatest"></canvas></div>
-				<div class="col-6"><canvas id="greekLatest"></canvas></div>
+			<div class="d-flex flex-column">
+				<div class="d-flex flex-row ml-3 mb-0 justify-content-between">
+					<div>
+						<h2>O'Learys</h2>
+						<span class="class-statistics">4 Klasser, 50 elever</span>
+					</div>
+					<a class="d-flex comment-link align-items-center" href="comments.html">Kommentarer</a>
+				</div>
+				<div class="chart-placeholder">
+					<div class="googleChart"></div>
+				</div>
+				<div class="d-flex flex-row">
+					<div class="d-flex flex-row">
+						<button class="diet-selector">Alla</button>
+						<button class="diet-selector">Veg</button>
+						<button class="diet-selector">Gluten</button>
+						<button class="diet-selector">Vanlig</button>
+					</div>
+					<div class="">
+						
+					</div>
+				</div>
 			</div>
 		</div>
+		<div class="separator"></div>
+		<div class="row col-12">
+			<div class="d-flex flex-column">
+				<img class="mb-0" src="img/POG.png" width="200" height="200">
+				<p class="mt-0 mb-1 text-center">Idag(10)</p>
+				<button>Kommentarer</button>
+			</div>
+			<div class="d-flex flex-column">
+				<div class="ml-3 mb-0">
+					<h2>O'Learys</h2>
+					<span>4 Klasser, 50 elever</span>
+				</div>
+				<div class="row">
+					<div id="chart" class="googleChart"></div>
+				</div>
+			</div>
+		</div>
+		<div class="separator"></div>
 	</div>
 
 
@@ -95,6 +126,7 @@
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 	<script src="js/dashboard.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </body>
 
 </html>
