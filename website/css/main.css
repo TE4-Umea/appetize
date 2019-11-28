@@ -37,3 +37,15 @@ a{
     width: 100%;
     height: 200px;
 }
+
+.separator {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: gray;
+    opacity: 0.2;
+    padding: 1px;
+}
+
+.class-statistics {
+    font-size: 18px;
+}
