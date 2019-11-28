@@ -25,7 +25,7 @@ function updateDashboard() {
                 }
             },
             {
-                name: "O'learys",
+                name: "O'Learys",
                 code_name: "olearys",
                 classes: 4,
                 students: 50,
@@ -69,15 +69,28 @@ function updateDashboard() {
         ]);
 
         var options = {
-            width: 900,
-            height: 400,
-            padding: 0,
-            margin: 0,
+            width: 800,
+            height: 200,
+            tooltip: {
+                textStyle: {
+                    fontSize: 14
+                }
+            },
+            legend: 'none',
+            chartArea: {
+                left: '5%',
+                top: '5%',
+                width: '85%',
+                height: '85%',
+            }
+
         };
 
-        var chart = new google.visualization.LineChart(document.getElementById('chart'));
-
-        chart.draw(data, options);
+        let charts = document.getElementsByClassName('googleChart');
+        for (let i = 0; i < charts.length; i++) {
+            let chart = new google.visualization.LineChart(charts[i]);
+            chart.draw(data, options);
+        }
     }
 }
 
