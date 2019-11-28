@@ -12,6 +12,8 @@ void savePreferences() async {
 void loadPreferences() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   globals.appetizeId = prefs.getString('appetize_id');
-  globals.vegetarian.value = prefs.getBool('vegetarian');
-  globals.gluten.value = prefs.getBool('gluten');
+  globals.vegetarian.value =
+      prefs.getBool('vegetarian') == null ? false : prefs.getBool('vegetarian');
+  globals.gluten.value =
+      prefs.getBool('gluten') == null ? false : prefs.getBool('gluten');
 }
