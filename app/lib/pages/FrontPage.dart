@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:Appetize/API.dart';
 import 'package:Appetize/Complaint/ComplaintList.dart';
-import 'package:Appetize/pages/FrontPageText.dart';
+import 'package:Appetize/FrontPageText.dart';
 import 'package:Appetize/RateBar.dart';
 import 'package:Appetize/Complaint/ComplaintCard.dart';
 import 'package:Appetize/Complaint/ComplaintButton.dart';

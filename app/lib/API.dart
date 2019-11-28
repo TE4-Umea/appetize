@@ -54,6 +54,7 @@ class API {
     String url = API_ENDPOINT + "/api/profile?id=" + appetizeId;
     Response response = await get(url);
     Map body = json.decode(response.body);
+    if(response.statusCode == 200) apiConnection.cancel();
     if (body['success']) {
       eatTime.value = body['profile']['time'];
       restaurant.value = body['profile']['restaurant'];

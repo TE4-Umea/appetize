@@ -11,8 +11,6 @@ class _TopCardState extends State<TopCard> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     double borderRadius = 10;
-    double iconWidth = 70;
-    double iconTop = 15;
     double textTop = 110;
     double height = 135;
     double lipHeight = 30;

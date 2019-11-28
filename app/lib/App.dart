@@ -1,3 +1,4 @@
+import 'package:Appetize/pages/ConnectingPage.dart';
 import 'package:Appetize/pages/FrontPage.dart';
 import 'package:Appetize/pages/MorePage.dart';
 import 'package:Appetize/pages/SplashPage.dart';
@@ -13,11 +14,12 @@ class App extends StatelessWidget {
       title: 'Appetize',
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/loading',
       routes: {
         '/': (context) => SplashPage(),
         '/home': (context) => FrontPage(),
         '/settings': (context) => MorePage(),
+        '/loading': (context) => ConnectingPage(),
       },
     );
   }

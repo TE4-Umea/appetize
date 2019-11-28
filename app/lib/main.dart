@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:Appetize/API.dart';
@@ -13,4 +14,8 @@ void main() async {
   setRestaurantColors(globals.restaurants);
   runApp(App());
   API.getProfile();
+
+  globals.apiConnection = Timer.periodic(Duration(seconds: 1), (timer) {
+    API.getProfile();
+  });
 }

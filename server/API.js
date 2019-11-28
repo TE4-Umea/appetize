@@ -134,7 +134,7 @@ module.exports = class API {
 
             var form = await getTodaysForm(profile.id);
             profile.hasForm = form ? true : false;
-            /* var user = await User.get(req.id); */
+
             this.respond(res, true, "success", {
                 profile,
                 form,

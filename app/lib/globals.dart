@@ -57,3 +57,4 @@ ValueNotifier<String> signupStatus = new ValueNotifier('');
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 var apiTimeout;
+var apiConnection;
