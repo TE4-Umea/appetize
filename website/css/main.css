@@ -61,3 +61,12 @@ a{
     background-color: lightskyblue;
     margin-right: 8%;
 }
+
+.chart-placeholder {
+    height: 200px;
+    width: 850px;
+}
+
+.diet-selector {
+    margin-left: 25px;
+}
