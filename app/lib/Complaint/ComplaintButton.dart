@@ -26,9 +26,10 @@ class ComplaintButtonState extends State<ComplaintButton> {
             title: Row(
               children: <Widget>[
                 Icon(
-                  Icons.assignment_late,
-                  color:
-                      globals.notifiedStaff.value ? Colors.green : Colors.red,
+                  globals.notifiedStaff.value
+                      ? Icons.assignment_turned_in
+                      : Icons.assignment_late,
+                  color: globals.notifiedStaff.value ? Colors.grey : Colors.red,
                 ),
               ],
             ),
@@ -237,7 +238,7 @@ class ComplaintButtonState extends State<ComplaintButton> {
                                       icon: Icon(value
                                           ? Icons.assignment_turned_in
                                           : Icons.assignment_late),
-                                      color: value ? Colors.green : Colors.red,
+                                      color: value ? Colors.grey : Colors.red,
                                       onPressed: () {
                                         _askIfHasNotifiedStaff();
                                       },

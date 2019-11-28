@@ -57,13 +57,15 @@ class API {
     if (body['success']) {
       eatTime.value = body['profile']['time'];
       restaurant.value = body['profile']['restaurant'];
+      open.value = body['open'];
+
       if (body['profile']['hasForm']) {
         deliverStatus.value = 2;
         foodRating.value = body['form']['rating'];
         complaints.value = body['form']['comments'];
-        /* notifiedStaff.value = body['form'][''] */
+        notifiedStaff.value =
+            body['form']['notified_staff'] == 1 ? true : false;
       }
-      print(body.toString());
 
       if (!loggedIn)
         navigatorKey.currentState

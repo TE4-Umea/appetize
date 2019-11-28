@@ -43,6 +43,8 @@ ValueNotifier<bool> gluten = new ValueNotifier<bool>(false);
 
 ValueNotifier<String> statusText = new ValueNotifier('Hur var maten idag?');
 
+ValueNotifier<bool> open = new ValueNotifier<bool>(true);
+
 // 0 - Failed to deliver RED
 // 1 - Request sent but not recived YELLOW
 // 2 - Request sent and recieved GREEN

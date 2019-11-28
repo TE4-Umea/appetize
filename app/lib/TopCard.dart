@@ -1,3 +1,4 @@
+import 'package:Appetize/API.dart';
 import 'package:Appetize/globals.dart';
 import 'package:flutter/material.dart';
 
@@ -104,6 +105,7 @@ class _TopCardState extends State<TopCard> with TickerProviderStateMixin {
                           ),
                           onPressed: () {
                             navigatorKey.currentState.pushNamed('/settings');
+                            API.getProfile();
                           },
                           elevation: 0,
                           backgroundColor:

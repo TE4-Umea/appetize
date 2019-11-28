@@ -3,6 +3,17 @@ module.exports = class API {
         const User = new (require("./User"))(config);
         const db = new (require("./Database"))(config);
 
+        function isOpen() {
+            var today = new Date();
+            // Check open hours
+            return (
+                today.getDay() > 1 &&
+                today.getDay() < 6 &&
+                today.getHours() >= 11 &&
+                today.getHours() < 14
+            );
+        }
+
         async function getTodaysForm(user_id) {
             var today = new Date();
             var form = await db.query_one(
@@ -13,12 +24,16 @@ module.exports = class API {
                     user_id
                 ]
             );
-            form.comments = JSON.parse(form.comments);
+            if (form) form.comments = JSON.parse(form.comments);
             return form;
         }
 
         // APP API
         app.post("/api/profile", async (req, res) => {
+            if (!isOpen()) {
+                this.respond(res, false, "Closed");
+                return;
+            }
             var req = this.parseRequest(req);
             var user = await User.get(req.id);
             var initialSubmission = false;
@@ -91,11 +106,14 @@ module.exports = class API {
             );
 
             await db.query(
-                "UPDATE forms SET rating = ?, comments = ? WHERE id = ?",
-                [req.vote, JSON.stringify(req.comments), form.id]
+                "UPDATE forms SET rating = ?,  notified_staff = ?, comments = ? WHERE id = ?",
+                [
+                    req.vote,
+                    Boolean(req.notified_staff),
+                    JSON.stringify(req.comments),
+                    form.id
+                ]
             );
-
-            console.log(req);
 
             console.log(
                 `[${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}] Food rating ${
@@ -117,7 +135,11 @@ module.exports = class API {
             var form = await getTodaysForm(profile.id);
             profile.hasForm = form ? true : false;
             /* var user = await User.get(req.id); */
-            this.respond(res, true, "success", { profile, form });
+            this.respond(res, true, "success", {
+                profile,
+                form,
+                open: isOpen()
+            });
         });
 
         app.post("/api/signup", async (req, res) => {
