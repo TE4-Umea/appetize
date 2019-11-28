@@ -69,7 +69,7 @@ function updateDashboard() {
         ]);
 
         var options = {
-            width: 800,
+            width: 850,
             height: 200,
             tooltip: {
                 textStyle: {
