@@ -49,3 +49,15 @@ a{
 .class-statistics {
     font-size: 18px;
 }
+
+.comment-link {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: lightskyblue;
+    margin-right: 8%;
+}
