@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+}
+
+.material-icons.md-96 { 
+    font-size: 96px; 
+}
+
+.user-comment {
+    font-size: 18px;
+    border: 1px solid black;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}

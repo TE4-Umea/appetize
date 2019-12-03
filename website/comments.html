@@ -7,6 +7,9 @@
     <title>Kommentarer</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/comments.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body>
     <div class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -55,19 +58,29 @@
     </div>
 
 
-    <div class="container justify-content-center">
+    <div class="container d-flex justify-content-center">
         <div class="col-8 mt-5" id="comments">
-            <div class="row comment">
-                <div class="emoji">
-
+            <div class="row justify-content-between">
+                <button class="diet-selector btn btn-primary">Alla</button>
+                <button class="diet-selector btn btn-outline-primary">Veg</button>
+                <button class=" diet-selector btn btn-outline-primary">Gluten</button>
+                <button class="diet-selector btn btn-outline-primary">Vanlig</button>
+                <button class=" diet-selector btn btn-outline-primary">Greek Grill</button>
+                <button class="diet-selector btn btn-outline-primary">O'Learys</button>
+            </div>
+            <div class="d-flex flex-row comment border border-dark rounded px-3 py-3 mt-5 justify-content-between">
+                <div class="emoji-holder d-flex align-items-center">
+                    <i class="material-icons md-96">sentiment_very_satisfied</i>
                 </div>
 
-                <div class="user-comments">
-
+                <div class="user-comments d-flex flex-column">
+                    <span class="user-comment">Kall mat</span>
+                    <span class="user-comment">Lång kö</span>
+                    <span class="user-comment">Slut på saft</span>
                 </div>
 
                 <div class="answer">
-
+                    <button class="btn btn-primary">Svara</button>
                 </div>
             </div>
 
