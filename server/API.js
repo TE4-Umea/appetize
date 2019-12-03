@@ -7,7 +7,7 @@ module.exports = class API {
             var today = new Date();
             // Check open hours
             return (
-                today.getDay() > 1 &&
+                today.getDay() >= 1 &&
                 today.getDay() < 6 &&
                 today.getHours() >= 11 &&
                 today.getHours() < 14
@@ -27,6 +27,21 @@ module.exports = class API {
             if (form) form.comments = JSON.parse(form.comments);
             return form;
         }
+
+        var months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ];
 
         // APP API
         app.post("/api/profile", async (req, res) => {
@@ -171,24 +186,51 @@ module.exports = class API {
 
         // ADMIN API
 
-        app.get("/api/comments", async (req, res) => {});
+        app.get("/api/comments", async (req, res) => {
+            req = this.parseRequest(req);
+
+            if (!req.token) {
+                this.respond(res, false, "No token, go to /admin and login!");
+                return;
+            }
+            var adminUser = await User.getAdminFromToken(req.token);
+            if (!adminUser) {
+                this.respond(
+                    res,
+                    false,
+                    "Invalid token, go to /admin and login again"
+                );
+                return;
+            }
+
+            this.respond(res, true, "Success", {
+                comments: [
+                    {
+                        date: 1575327651406,
+                        text: ["Kall mat", "Lång kö"],
+                        rating: 1,
+                        restaurant: "olearys",
+                        special: ["veg"]
+                    },
+                    {
+                        date: 1575327651406,
+                        text: ["Kall mat", "Annat..?"],
+                        rating: 1,
+                        restaurant: "greek",
+                        special: []
+                    },
+                    {
+                        date: 1575327651406,
+                        text: ["Kall mat"],
+                        rating: 1,
+                        restaurant: "olearys",
+                        special: ["gluten", "veg"]
+                    }
+                ]
+            });
+        });
 
         app.get("/api/dashboard", async (req, res) => {
-            var months = [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December"
-            ];
-
             req = this.parseRequest(req);
 
             if (!req.token) {
@@ -252,9 +294,6 @@ module.exports = class API {
                 for (let student of students)
                     userIds.push("user = " + student.id);
 
-                var todaysSum = 0;
-                var todaysVotes = 0;
-
                 var data = await db.query(
                     "SELECT * FROM forms WHERE (" +
                         userIds.join(" OR ") +
@@ -277,11 +316,12 @@ module.exports = class API {
                     for (var form of data) {
                         if (compareDates(form.day, date)) {
                             votes++;
-                            sumScore += form.rating;
+                            sumScore += getScore(form.rating);
                         }
                     }
 
-                    var score = (sumScore / votes).toFixed(2);
+                    var score = (sumScore / votes).toFixed(1);
+                    if (votes == 0) score = 0.0;
 
                     if (votes > 0) restaurant.data[i] = score;
 
@@ -292,10 +332,16 @@ module.exports = class API {
                 }
             }
 
-            console.log(restaurants);
-
             this.respond(res, true, "Success", { restaurants });
         });
+
+        /**
+         * Inputs a rating from 0-3 submitted by a student
+         * outputs a score from 0-10
+         */
+        function getScore(rating) {
+            return Math.round(rating * 3.333);
+        }
 
         function compareDates(date1, date2) {
             return formatDate(date1) == formatDate(date2);

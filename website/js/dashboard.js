@@ -17,45 +17,10 @@ window.onload = () => {
         if (!res.success) {
             alert(res.text);
         } else {
-            console.log(res.restaurants);
+            restaurants = res.restaurants;
             updateDashboard();
         }
     });
-};
-
-var restaurantData = {
-    restaurants: [
-        {
-            name: "Greek Grill",
-            code_name: "greek",
-            classes: ["TE4", "TE17", "TE18"],
-            students: 50,
-            color: "#5482ff",
-            dark_color: "#3b60c4",
-            todays_score: 8.5,
-            data: [
-                {
-                    date: 0,
-                    score: 2
-                }
-            ]
-        },
-        {
-            name: "O'Learys",
-            color: "#2d9784",
-            dark_color: "#1e695b",
-            code_name: "olearys",
-            classes: ["ES17", "ES18", "ES19"],
-            students: 50,
-            todays_score: 3.5,
-            data: [
-                {
-                    date: 0,
-                    score: 2
-                }
-            ]
-        }
-    ]
 };
 
 function updateDashboard() {
@@ -69,7 +34,8 @@ function updateDashboard() {
         "#42eb4a"
     ];
 
-    for (let restaurant of restaurantData.restaurants) {
+    for (let key in restaurants) {
+        let restaurant = restaurants[key];
         let dropdownOptions = "";
         for (let c of restaurant.classes) {
             dropdownOptions +=
@@ -85,7 +51,7 @@ function updateDashboard() {
 					${restaurant.todays_score}
 			</div>
 	
-			<p class="mt-0 mb-1 text-center" style="top:12px;position: relative;">Idag (10 röster)</p>
+			<p class="mt-0 mb-1 text-center" style="top:12px;position: relative;">Idag (${restaurant.todays_votes} röster)</p>
 		</div>
 		<div class="d-flex flex-column">
 			<div class="d-flex flex-row ml-3 mb-0 justify-content-between align-items-start">
@@ -114,7 +80,19 @@ function updateDashboard() {
 						<div class="dropdown-menu" aria-labelledby="dropdown-olearys">
 							<a class="dropdown-item" href="">Alla klasser</a>
 							${dropdownOptions}
+						</div>
+					</div>
 
+					<div class="dropdown">
+						<button class="diet-selector btn btn-primary dropdown-toggle" type="button"
+							id="dropdown-olearys" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="${restaurant.code_name}-time-select">
+							Månad
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdown-olearys">
+						<a class="dropdown-item" href="javascript:selectTime('${restaurant.code_name}', 'week')">Vecka</a>
+						<a class="dropdown-item" href="javascript:selectTime('${restaurant.code_name}', 'month')">Månad</a>
+						<a class="dropdown-item" href="javascript:selectTime('${restaurant.code_name}', 'year')">År</a>
+						<a class="dropdown-item" href="javascript:selectTime('${restaurant.code_name}', 'all')">Allt</a>
 						</div>
 					</div>
 				</div>
@@ -150,15 +128,12 @@ function updateDashboard() {
      */
 }
 
-function drawGraph(restaurant) {
-    for (var r of restaurantData.restaurants)
-        if (restaurant == r.code_name) restaurant = r;
+function selectTime(restaurant, time) {
+    console.log(restaurant, time);
+}
 
-    var days = restaurant.data;
-    /* 
-    for (let day of days) {
-        row.push([new Date(day.date), day.score]);
-    } */
+function drawGraph(restaurant) {
+    restaurant = restaurants[restaurant];
 
     var ctx = document
         .getElementById("chart-" + restaurant.code_name)
@@ -167,113 +142,11 @@ function drawGraph(restaurant) {
         type: "line",
 
         data: {
-            labels: [
-                "3 Dec",
-                "4 Dec",
-                "5 Dec",
-                "6 Dec",
-                "7 Dec",
-                "8 Dec",
-                "9 Dec",
-                "10 Dec",
-                "11 Dec",
-                "12 Dec",
-                "13 Dec",
-                "14 Dec",
-                "15 Dec",
-                "16 Dec",
-                "17 Dec",
-                "18 Dec",
-                "19 Dec",
-                "20 Dec",
-                "21 Dec",
-                "22 Dec",
-                "23 Dec",
-                "24 Dec",
-                "25 Dec",
-                "26 Dec",
-                "27 Dec",
-                "28 Dec",
-                "29 Dec",
-                "30 Dec",
-                "31 Dec",
-                "1 Jan",
-                "2 Jan",
-                "3 Jan",
-                "4 Jan",
-                "5 Jan",
-                "6 Jan",
-                "7 Jan",
-                "8 Jan",
-                "9 Jan",
-                "10 Jan",
-                "11 Jan",
-                "12 Jan",
-                "13 Jan",
-                "14 Jan",
-                "15 Jan",
-                "16 Jan",
-                "17 Jan",
-                "18 Jan",
-                "19 Jan",
-                "20 Jan",
-                "21 Jan"
-            ],
+            labels: restaurant.labels,
             datasets: [
                 {
-                    data: [
-                        "5.99",
-                        "6.58",
-                        "5.68",
-                        "5.70",
-                        "5.66",
-                        "5.19",
-                        "4.66",
-                        "5.55",
-                        "4.88",
-                        "4.28",
-                        "4.48",
-                        "5.30",
-                        "5.86",
-                        "6.06",
-                        "6.89",
-                        "6.16",
-                        "7.00",
-                        "6.81",
-                        "6.85",
-                        "6.93",
-                        "7.46",
-                        "7.51",
-                        "7.09",
-                        "7.26",
-                        "7.78",
-                        "7.26",
-                        "7.59",
-                        "6.66",
-                        "6.07",
-                        "6.06",
-                        "6.49",
-                        "7.48",
-                        "7.98",
-                        "7.82",
-                        "7.79",
-                        "8.32",
-                        "8.75",
-                        "9.54",
-                        "9.56",
-                        "8.92",
-                        "8.04",
-                        "8.89",
-                        "9.56",
-                        "9.95",
-                        "9.76",
-                        "10.00",
-                        "9.90",
-                        "10.00",
-                        "9.02",
-                        "9.58"
-                    ],
-                    label: "Food",
+                    data: restaurant.data,
+                    label: "Poäng",
                     borderColor: restaurant.color,
                     fill: true,
                     backgroundColor: restaurant.dark_color
@@ -281,6 +154,9 @@ function drawGraph(restaurant) {
             ]
         },
         options: {
+            legend: {
+                display: false
+            },
             responsive: true,
             maintainAspectRatio: false,
             scales: {
@@ -289,7 +165,6 @@ function drawGraph(restaurant) {
                         display: true,
                         ticks: {
                             max: 10,
-
                             beginAtZero: true
                         }
                     }
