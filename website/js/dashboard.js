@@ -1,5 +1,26 @@
+var options = {
+    olearys: {
+        time: "month", // week, month, year, all
+        special: "none", // veg, gluten, none
+        group: "all" // te16, te17, ee17, ee18..., all
+    },
+    greek: {
+        time: "month", // week, month, year, all
+        special: "none", // veg, gluten, none
+        group: "all" // te16, te17, ee17, ee18..., all
+    }
+};
+
 window.onload = () => {
-    updateDashboard();
+    axios.get("/api/dashboard", { params: { token, options } }).then(res => {
+        res = res.data;
+        if (!res.success) {
+            alert(res.text);
+        } else {
+            console.log(res.restaurants);
+            updateDashboard();
+        }
+    });
 };
 
 var restaurantData = {
@@ -12,8 +33,6 @@ var restaurantData = {
             color: "#5482ff",
             dark_color: "#3b60c4",
             todays_score: 8.5,
-            data_class: "",
-            data_special: "",
             data: [
                 {
                     date: 0,
@@ -29,8 +48,6 @@ var restaurantData = {
             classes: ["ES17", "ES18", "ES19"],
             students: 50,
             todays_score: 3.5,
-            data_class: "",
-            data_special: "",
             data: [
                 {
                     date: 0,
@@ -265,7 +282,19 @@ function drawGraph(restaurant) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            scales: {
+                yAxes: [
+                    {
+                        display: true,
+                        ticks: {
+                            max: 10,
+
+                            beginAtZero: true
+                        }
+                    }
+                ]
+            }
         }
     });
 }

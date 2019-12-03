@@ -4,6 +4,10 @@ module.exports = class Routes {
             res.sendFile("admin.html", { root: "../website" });
         });
 
+        app.get("/dashboard", (req, res) => {
+            res.sendFile("dashboard.html", { root: "../website" });
+        });
+
         app.get("/manage", (req, res) => {
             res.sendFile("manage.html", { root: "../website" });
         });
