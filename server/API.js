@@ -247,7 +247,8 @@ module.exports = class API {
                 return;
             }
 
-            var options = JSON.parse(req.options);
+            req.options = JSON.parse(req.options);
+
             var restaurants = {
                 olearys: {
                     name: "Oleary's",
@@ -265,6 +266,8 @@ module.exports = class API {
 
             for (var key in restaurants) {
                 var restaurant = restaurants[key];
+                var options = req.options[key];
+
                 restaurant.classes = [];
                 var classes = await db.query(
                     "SELECT * FROM classes WHERE restaurant = ?",
@@ -281,15 +284,18 @@ module.exports = class API {
                 );
 
                 restaurant.students = students.length;
-
                 restaurant.labels = [];
                 restaurant.data = [];
 
-                var days = 30;
+                var days = 7;
+                if (options.time == "month") days = 30;
+                else if (options.time == "year") days = 365;
+                else if (options.time == "all") days = 1000;
 
                 var date = new Date();
 
                 date.setDate(date.getDate() - days);
+
                 var userIds = [];
                 for (let student of students)
                     userIds.push("user = " + student.id);

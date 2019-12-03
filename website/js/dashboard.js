@@ -1,17 +1,22 @@
 var options = {
     olearys: {
-        time: "month", // week, month, year, all
+        time: "week", // week, month, year, all
         special: "none", // veg, gluten, none
         group: "all" // te16, te17, ee17, ee18..., all
     },
     greek: {
-        time: "month", // week, month, year, all
+        time: "week", // week, month, year, all
         special: "none", // veg, gluten, none
         group: "all" // te16, te17, ee17, ee18..., all
     }
 };
 
-window.onload = () => {
+function selectTime(restaurant, time) {
+    options[restaurant].time = time;
+    downloadDashboard();
+}
+
+function downloadDashboard() {
     axios.get("/api/dashboard", { params: { token, options } }).then(res => {
         res = res.data;
         if (!res.success) {
@@ -21,6 +26,10 @@ window.onload = () => {
             updateDashboard();
         }
     });
+}
+
+window.onload = () => {
+    downloadDashboard();
 };
 
 function updateDashboard() {
@@ -34,6 +43,8 @@ function updateDashboard() {
         "#42eb4a"
     ];
 
+    document.getElementById("restaurants-dash").innerHTML = "";
+
     for (let key in restaurants) {
         let restaurant = restaurants[key];
         let dropdownOptions = "";
@@ -41,6 +52,20 @@ function updateDashboard() {
             dropdownOptions +=
                 '<a class="dropdown-item" href="#!">' + c + "</a>";
         }
+
+        var timeText = {
+            week: "Vecka",
+            month: "Månad",
+            year: "År",
+            all: "Allt"
+        };
+
+        var timeSelectors = "";
+        var timevalue = timeText[options[restaurant.code_name].time];
+        for (key in timeText) {
+            timeSelectors += `<a class="dropdown-item" href="javascript:selectTime('${restaurant.code_name}', '${key}')">${timeText[key]}</a>`;
+        }
+
         document.getElementById(
             "restaurants-dash"
         ).innerHTML += `<div class="row col-12 mt-3">
@@ -84,15 +109,12 @@ function updateDashboard() {
 					</div>
 
 					<div class="dropdown">
-						<button class="diet-selector btn btn-primary dropdown-toggle" type="button"
+						<button id="${restaurant.code_name}-time-selector" class="diet-selector btn btn-primary dropdown-toggle" type="button"
 							id="dropdown-olearys" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="${restaurant.code_name}-time-select">
-							Månad
+							${timevalue}
 						</button>
 						<div class="dropdown-menu" aria-labelledby="dropdown-olearys">
-						<a class="dropdown-item" href="javascript:selectTime('${restaurant.code_name}', 'week')">Vecka</a>
-						<a class="dropdown-item" href="javascript:selectTime('${restaurant.code_name}', 'month')">Månad</a>
-						<a class="dropdown-item" href="javascript:selectTime('${restaurant.code_name}', 'year')">År</a>
-						<a class="dropdown-item" href="javascript:selectTime('${restaurant.code_name}', 'all')">Allt</a>
+						${timeSelectors}
 						</div>
 					</div>
 				</div>
@@ -126,10 +148,6 @@ function updateDashboard() {
 
     /*
      */
-}
-
-function selectTime(restaurant, time) {
-    console.log(restaurant, time);
 }
 
 function drawGraph(restaurant) {
