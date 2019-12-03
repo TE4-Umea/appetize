@@ -171,6 +171,142 @@ module.exports = class API {
 
         // ADMIN API
 
+        app.get("/api/comments", async (req, res) => {});
+
+        app.get("/api/dashboard", async (req, res) => {
+            var months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ];
+
+            req = this.parseRequest(req);
+
+            if (!req.token) {
+                this.respond(res, false, "No token, go to /admin and login!");
+                return;
+            }
+            var adminUser = await User.getAdminFromToken(req.token);
+            if (!adminUser) {
+                this.respond(
+                    res,
+                    false,
+                    "Invalid token, go to /admin and login again"
+                );
+                return;
+            }
+
+            var options = JSON.parse(req.options);
+            var restaurants = {
+                olearys: {
+                    name: "Oleary's",
+                    code_name: "olearys",
+                    color: "#2d9784",
+                    dark_color: "#1e695b"
+                },
+                greek: {
+                    name: "Greek grill",
+                    code_name: "greek",
+                    color: "#5482ff",
+                    dark_color: "#3b60c4"
+                }
+            };
+
+            for (var key in restaurants) {
+                var restaurant = restaurants[key];
+                restaurant.classes = [];
+                var classes = await db.query(
+                    "SELECT * FROM classes WHERE restaurant = ?",
+                    key
+                );
+                var classIds = [];
+                for (var c of classes) {
+                    restaurant.classes.push(c.name);
+                    classIds.push("class = " + c.id);
+                }
+
+                var students = await db.query(
+                    "SELECT * FROM users WHERE " + classIds.join(" OR ")
+                );
+
+                restaurant.students = students.length;
+
+                restaurant.labels = [];
+                restaurant.data = [];
+
+                var days = 30;
+
+                var date = new Date();
+
+                date.setDate(date.getDate() - days);
+                var userIds = [];
+                for (let student of students)
+                    userIds.push("user = " + student.id);
+
+                var todaysSum = 0;
+                var todaysVotes = 0;
+
+                var data = await db.query(
+                    "SELECT * FROM forms WHERE (" +
+                        userIds.join(" OR ") +
+                        ") AND day > ?",
+                    [
+                        date.getFullYear(),
+                        date.getMonth() + 1,
+                        date.getDate()
+                    ].join("-")
+                );
+
+                for (var i = 0; i < days; i++) {
+                    date.setDate(date.getDate() + 1);
+                    restaurant.labels[i] = `${date.getDate()} ${months[
+                        date.getMonth()
+                    ].substr(0, 3)}`;
+
+                    var votes = 0;
+                    var sumScore = 0;
+                    for (var form of data) {
+                        if (compareDates(form.day, date)) {
+                            votes++;
+                            sumScore += form.rating;
+                        }
+                    }
+
+                    var score = (sumScore / votes).toFixed(2);
+
+                    if (votes > 0) restaurant.data[i] = score;
+
+                    if (i == days - 1) {
+                        restaurant.todays_score = score;
+                        restaurant.todays_votes = votes;
+                    }
+                }
+            }
+
+            console.log(restaurants);
+
+            this.respond(res, true, "Success", { restaurants });
+        });
+
+        function compareDates(date1, date2) {
+            return formatDate(date1) == formatDate(date2);
+        }
+
+        function formatDate(date) {
+            return [date.getFullYear(), date.getMonth(), date.getDate()].join(
+                "-"
+            );
+        }
+
         app.post("/api/login", async (req, res) => {
             var user = await User.getAdmin(
                 req.body.username,
