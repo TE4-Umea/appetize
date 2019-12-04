@@ -21,6 +21,11 @@ var comments = [
     }
 ];
 
-for(var i = 0; i < comments.length; i++){
-    
+for (var i = 0; i < comments.length; i++) {
+
 }
+
+axios.get("http://192.168.2.35:5050/api/comments", { params: { token } })
+    .then(res => {
+        console.log(res.data);
+    })
