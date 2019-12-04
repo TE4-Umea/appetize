@@ -1,100 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Kommentarer</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="./js/main.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/main.css">
-    <link rel="stylesheet" href="./css/comments.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Kommentarer</title>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="./js/main.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/comments.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
-    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-md-auto col-5 justify-content-between">
-                <li class="nav-item my-2">
-                    <a href="./dashboard.html" class="nav-link" id="overview">Överblick</a>
-                </li>
-                <li class="nav-item dropdown my-2">
-                    <a href="#" class="nav-link dropdown-toggle" id="olearysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        O'Learys
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="olearysDropdown">
-                        <a href="./addfood.html?restaurant=olearys" class="dropdown-item">Lägg till matsedel</a>
-                        <a href="./comments.html?restaurant=olearys" class="dropdown-item">Se kommentarer</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown my-2">
-                    <a href="#" class="nav-link dropdown-toggle" id="greekDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Greek Grill
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="greekDropdown">
-                        <a href="./addfood.html?restaurant=greek" class="dropdown-item">Lägg till matsedel</a>
-                        <a href="./comments.html?restaurant=greek" class="dropdown-item">Se kommentarer</a>
-                    </div>
-                </li>
-                <li class="nav-item my-2">
-                    <a href="./comments.html" class="nav-link" id="comments">Kommentarer</a>
-                </li>
-                <li class="nav-item my-2">
-                    <a href="" class="nav-link" id="classes">Klasser</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto justify-content-right">
-                <li class="nav-item">
-                    <a href="#" class="nav-link" id="logout">
-                        <img src="./img/logout.png" style="width: 100%; max-width: 24px;" alt="Logout">
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-md-auto col-5 justify-content-between">
+				<li class="nav-item my-2">
+					<a href="./dashboard.html" class="nav-link" id="overview">Överblick</a>
+				</li>
+				<li class="nav-item dropdown my-2">
+					<a href="#" class="nav-link dropdown-toggle" id="olearysDropdown" role="button"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						O'Learys
+					</a>
+					<div class="dropdown-menu" aria-labelledby="olearysDropdown">
+						<a href="./addfood.html?restaurant=olearys" class="dropdown-item">Lägg till matsedel</a>
+						<a href="./comments.html?restaurant=olearys" class="dropdown-item">Se kommentarer</a>
+					</div>
+				</li>
+				<li class="nav-item dropdown my-2">
+					<a href="#" class="nav-link dropdown-toggle" id="greekDropdown" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						Greek Grill
+					</a>
+					<div class="dropdown-menu" aria-labelledby="greekDropdown">
+						<a href="./addfood.html?restaurant=greek" class="dropdown-item">Lägg till matsedel</a>
+						<a href="./comments.html?restaurant=greek" class="dropdown-item">Se kommentarer</a>
+					</div>
+				</li>
+				<li class="nav-item my-2">
+					<a href="./comments.html" class="nav-link" id="comments">Kommentarer</a>
+				</li>
+				<li class="nav-item my-2">
+					<a href="" class="nav-link" id="classes">Klasser</a>
+				</li>
+			</ul>
+			<ul class="navbar-nav ml-auto justify-content-right">
+				<li class="nav-item">
+					<a href="#" class="nav-link" id="logout">
+						<img src="./img/logout.png" style="width: 100%; max-width: 24px;" alt="Logout">
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 
 
-    <div class="container d-flex justify-content-center">
-        <div class="col-8 mt-5" id="comments">
-            <div class="row justify-content-between">
-                <button class="diet-selector btn btn-primary">Alla</button>
-                <button class="diet-selector btn btn-outline-primary">Veg</button>
-                <button class=" diet-selector btn btn-outline-primary">Gluten</button>
-                <button class="diet-selector btn btn-outline-primary">Vanlig</button>
-                <button class=" diet-selector btn btn-outline-primary">Greek Grill</button>
-                <button class="diet-selector btn btn-outline-primary">O'Learys</button>
-            </div>
-            <div class="d-flex flex-row comment border border-dark rounded px-3 py-3 mt-5 justify-content-between">
-                <div class="emoji-holder d-flex align-items-center">
-                    <i class="material-icons md-96">sentiment_very_satisfied</i>
-                </div>
+	<div class="container d-flex justify-content-center">
+		<div class="col-8 mt-5" id="comments">
+			<div class="row justify-content-between">
+				<button class="diet-selector btn btn-primary">Alla</button>
+				<button class="diet-selector btn btn-outline-primary">Veg</button>
+				<button class=" diet-selector btn btn-outline-primary">Gluten</button>
+				<button class="diet-selector btn btn-outline-primary">Vanlig</button>
+				<button class=" diet-selector btn btn-outline-primary">Greek Grill</button>
+				<button class="diet-selector btn btn-outline-primary">O'Learys</button>
+			</div>
 
-                <div class="user-comments d-flex flex-column">
-                    <span class="user-comment">Kall mat</span>
-                    <span class="user-comment">Lång kö</span>
-                    <span class="user-comment">Slut på saft</span>
-                </div>
+			<div id="comments-wrap"></div>
 
-                <div class="answer">
-                    <button class="btn btn-primary">Svara</button>
-                </div>
-            </div>
 
-            
-            
-        </div>
-    </div>
+		</div>
+	</div>
 
-    <script src="./js/comments.js"></script>
+	<script src="./js/comments.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
 </body>
+
 </html>

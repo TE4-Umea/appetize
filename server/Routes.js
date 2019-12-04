@@ -15,5 +15,9 @@ module.exports = class Routes {
         app.get("/code", (req, res) => {
             res.sendFile("code.html", { root: "../website" });
         });
+
+        app.get("/comments", (req, res) => {
+            res.sendFile("comments.html", { root: "../website" });
+        });
     }
 };

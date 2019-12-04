@@ -208,14 +208,14 @@ module.exports = class API {
                     {
                         date: 1575327651406,
                         text: ["Kall mat", "Lång kö"],
-                        rating: 1,
+                        rating: 3,
                         restaurant: "olearys",
                         special: ["veg"]
                     },
                     {
                         date: 1575327651406,
                         text: ["Kall mat", "Annat..?"],
-                        rating: 1,
+                        rating: 0,
                         restaurant: "greek",
                         special: []
                     },
