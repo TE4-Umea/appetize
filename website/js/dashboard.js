@@ -19,11 +19,13 @@ function selectTime(restaurant, time) {
 }
 
 function downloadDashboard() {
+    showLoadingScreen();
     axios.get("/api/dashboard", { params: { token, options } }).then(res => {
         res = res.data;
         if (!res.success) {
             alert(res.text);
         } else {
+            hideLoadingScreen();
             updateDashboard(res.restaurants);
             setTimeout(() => {
                 restaurants = res.restaurants;

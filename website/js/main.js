@@ -17,7 +17,7 @@ window.onload = () => {
 };
 
 function add_class() {
-    var name = prompt("Enge namn för nya klassen");
+    var name = prompt("Ange namn för nya klassen");
     if (name) {
         axios
             .post("/api/new_class", {
@@ -68,7 +68,7 @@ function loadManeageBoard() {
                 }</span> - <div class="restaurant" style="background:${
                     colors[entry.restaurant]
                 }">${restaurants[entry.restaurant]}</div><br>
-                <button onclick="generate_code(${
+                <button class="btn btn-outline-primary mb-1" onclick="generate_code(${
                     entry.id
                 })">GENERERA KOD</button><br>
                 <input type="text" placeholder="TID" oninput="change_time(${
@@ -86,7 +86,9 @@ function loadManeageBoard() {
                 }" value="olearys" ${
                     entry.restaurant != "greek" ? "checked" : ""
                 }> Oleary's<br>
-                <button onclick="remove_class(${entry.id})">RADERA</button>
+                <button class="btn btn-outline-primary" onclick="remove_class(${
+                    entry.id
+                })">RADERA</button>
                 </div>`;
             }
         });
@@ -136,9 +138,35 @@ function login() {
             var data = res.data;
             if (data.success) {
                 localStorage.setItem("token", data.token);
-                location.href = "/manage";
+                location.href = "/dashboard";
             } else {
                 document.getElementById("error-message").innerText = data.text;
             }
         });
+}
+
+function logout() {
+    localStorage.removeItem("token");
+    location.href = "/admin";
+}
+
+var overlay;
+
+function showLoadingScreen() {
+    overlay = document.createElement("div");
+    overlay.id = "overlay";
+    var loadingVideo = document.createElement("video");
+    loadingVideo.id = "loading-video";
+    loadingVideo.autoplay = true;
+    loadingVideo.setAttribute("playsinline", true);
+    loadingVideo.muted = true;
+    loadingVideo.loop = true;
+    loadingVideo.innerHTML = '<source src="img/loading.webm">';
+    overlay.appendChild(loadingVideo);
+
+    document.body.insertBefore(overlay, document.body.firstChild);
+}
+
+function hideLoadingScreen() {
+    overlay.remove();
 }

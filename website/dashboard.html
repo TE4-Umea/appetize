@@ -18,6 +18,7 @@
 </head>
 
 <body>
+	<!-- NAVBAR START --->
 	<div class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,9 +27,11 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-md-auto col-5 justify-content-between">
-				<img src="img/icon_white.png" height="60" alt="icon">
+				<a href="/dashboard">
+					<img src="img/icon_white.png" height="60" alt="icon">
+				</a>
 				<li class="nav-item my-2">
-					<a href="./dashboard.html" class="nav-link" id="overview">Överblick</a>
+					<a href="./dashboard" class="nav-link" id="overview">Överblick</a>
 				</li>
 				<li class="nav-item dropdown my-2">
 					<a href="#" class="nav-link dropdown-toggle" id="olearysDropdown" role="button"
@@ -51,15 +54,15 @@
 					</div>
 				</li>
 				<li class="nav-item my-2">
-					<a href="./comments.html" class="nav-link" id="comments">Kommentarer</a>
+					<a href="./comments" class="nav-link" id="comments">Kommentarer</a>
 				</li>
 				<li class="nav-item my-2">
-					<a href="manage.html" class="nav-link" id="classes">Klasser</a>
+					<a href="manage" class="nav-link" id="classes">Klasser</a>
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto justify-content-right">
 				<li class="nav-item">
-					<a href="#" class="nav-link" id="logout">
+					<a href="javascript:logout()" class="nav-link" id="logout">
 						<svg xmlns="http://www.w3.org/2000/svg" style="fill:white;width: 100%; max-width: 30px;"
 							alt="Logout" width="30" height="30" viewBox="0 0 24 24">
 							<path d="M0 0h24v24H0z" fill="none" />
@@ -71,6 +74,7 @@
 			</ul>
 		</div>
 	</div>
+	<!-- NAVBAR END --->
 
 
 	<div class="container justify-content-center" id="restaurants-dash">
