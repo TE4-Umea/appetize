@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kommentarer</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/main.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/comments.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 <body>
     <div class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -38,7 +43,7 @@
                     </div>
                 </li>
                 <li class="nav-item my-2">
-                    <a href="./comments.html" class="nav-link" id="comments">Se alla kommentarer</a>
+                    <a href="./comments.html" class="nav-link" id="comments">Kommentarer</a>
                 </li>
                 <li class="nav-item my-2">
                     <a href="" class="nav-link" id="classes">Klasser</a>
@@ -55,27 +60,38 @@
     </div>
 
 
-    <div class="container justify-content-center">
-        <div class="col-8 mt-5">
-            <div class="card">
-                <div class="card-body">
-                    <p>Det var kall mat</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div  class="card-body">
-                            <p>test</p>
-                        </div>
-                    </li>
-                </ul>
+    <div class="container d-flex justify-content-center">
+        <div class="col-8 mt-5" id="comments">
+            <div class="row justify-content-between">
+                <button class="diet-selector btn btn-primary">Alla</button>
+                <button class="diet-selector btn btn-outline-primary">Veg</button>
+                <button class=" diet-selector btn btn-outline-primary">Gluten</button>
+                <button class="diet-selector btn btn-outline-primary">Vanlig</button>
+                <button class=" diet-selector btn btn-outline-primary">Greek Grill</button>
+                <button class="diet-selector btn btn-outline-primary">O'Learys</button>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <p>Det var lång kö</p>
+            <div class="d-flex flex-row comment border border-dark rounded px-3 py-3 mt-5 justify-content-between">
+                <div class="emoji-holder d-flex align-items-center">
+                    <i class="material-icons md-96">sentiment_very_satisfied</i>
+                </div>
+
+                <div class="user-comments d-flex flex-column">
+                    <span class="user-comment">Kall mat</span>
+                    <span class="user-comment">Lång kö</span>
+                    <span class="user-comment">Slut på saft</span>
+                </div>
+
+                <div class="answer">
+                    <button class="btn btn-primary">Svara</button>
                 </div>
             </div>
+
+            
+            
         </div>
     </div>
+
+    <script src="./js/comments.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
