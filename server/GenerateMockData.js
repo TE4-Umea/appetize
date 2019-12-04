@@ -1,3 +1,6 @@
+console.log("Started...");
+console.time("Generated in");
+
 var fs = require("file-system");
 
 var sql = `TRUNCATE users;
@@ -10,7 +13,7 @@ ALTER TABLE classes
 	MODIFY id INT(10) UNSIGNED;
 `;
 
-var daysBack = 30;
+var daysBack = 500;
 var studentsPerClass = 18;
 var proOfBeingVeg = 10; // %
 var proOfBeingGluten = 3; // %
@@ -66,18 +69,20 @@ for (let i = 0; i < classes.length * studentsPerClass; i++) {
 function insertStudentData(student_id) {
     var date = new Date();
     for (var i = 0; i < daysBack; i++) {
-        var comments = [];
-        while (Math.random() > 0.5 && comments.length < 5) {
-            comments.push(
-                complaints[Math.floor(Math.random() * complaints.length)]
-            );
+        if (date.getDay() > 0 && date.getDay() < 6) {
+            var comments = [];
+            while (Math.random() > 0.5 && comments.length < 5) {
+                comments.push(
+                    complaints[Math.floor(Math.random() * complaints.length)]
+                );
+            }
+            sql += `INSERT INTO forms (day, rating, notified_staff, comments, user) VALUES ("${date.getFullYear()}-${date.getMonth() +
+                1}-${date.getDate()}", ${Math.floor(
+                Math.random() * 4
+            )}, ${Math.random() > 0.7}, '${JSON.stringify(
+                comments
+            )}', ${student_id});\n`;
         }
-        sql += `INSERT INTO forms (day, rating, notified_staff, comments, user) VALUES ("${date.getFullYear()}-${date.getMonth() +
-            1}-${date.getDate()}", ${Math.floor(
-            Math.random() * 4
-        )}, ${Math.random() > 0.7}, '${JSON.stringify(
-            comments
-        )}', ${student_id});\n`;
         date.setDate(date.getDate() - 1);
     }
 }
@@ -87,4 +92,6 @@ sql += `ALTER TABLE users
 ALTER TABLE classes
 	MODIFY id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY;`;
 
+console.timeEnd("Generated in");
 fs.writeFileSync("MockData.sql", sql);
+console.log("Saved to MockData.sql");

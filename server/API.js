@@ -289,6 +289,7 @@ module.exports = class API {
 
                 var days = 7;
                 if (options.time == "month") days = 30;
+                else if (options.time == "threemonths") days = 90;
                 else if (options.time == "year") days = 365;
                 else if (options.time == "all") days = 1000;
 
@@ -313,27 +314,32 @@ module.exports = class API {
 
                 for (var i = 0; i < days; i++) {
                     date.setDate(date.getDate() + 1);
-                    restaurant.labels[i] = `${date.getDate()} ${months[
-                        date.getMonth()
-                    ].substr(0, 3)}`;
+                    if (date.getDay() > 0 && date.getDay() < 6) {
+                        restaurant.labels.push(
+                            `${date.getDate()} ${months[date.getMonth()].substr(
+                                0,
+                                3
+                            )}`
+                        );
 
-                    var votes = 0;
-                    var sumScore = 0;
-                    for (var form of data) {
-                        if (compareDates(form.day, date)) {
-                            votes++;
-                            sumScore += getScore(form.rating);
+                        var votes = 0;
+                        var sumScore = 0;
+                        for (var form of data) {
+                            if (compareDates(form.day, date)) {
+                                votes++;
+                                sumScore += getScore(form.rating);
+                            }
                         }
-                    }
 
-                    var score = (sumScore / votes).toFixed(1);
-                    if (votes == 0) score = 0.0;
+                        var score = (sumScore / votes).toFixed(1);
+                        if (votes == 0) score = 0.0;
 
-                    if (votes > 0) restaurant.data[i] = score;
+                        if (votes > 0) restaurant.data.push(score);
 
-                    if (i == days - 1) {
-                        restaurant.todays_score = score;
-                        restaurant.todays_votes = votes;
+                        if (i == days - 1) {
+                            restaurant.todays_score = score;
+                            restaurant.todays_votes = votes;
+                        }
                     }
                 }
             }

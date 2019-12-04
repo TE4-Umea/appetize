@@ -1,3 +1,5 @@
+var restaurants;
+
 var options = {
     olearys: {
         time: "week", // week, month, year, all
@@ -22,8 +24,10 @@ function downloadDashboard() {
         if (!res.success) {
             alert(res.text);
         } else {
-            restaurants = res.restaurants;
-            updateDashboard();
+            updateDashboard(res.restaurants);
+            setTimeout(() => {
+                restaurants = res.restaurants;
+            });
         }
     });
 }
@@ -32,21 +36,23 @@ window.onload = () => {
     downloadDashboard();
 };
 
-function updateDashboard() {
-    var range = [
-        "#f73939",
-        "#f73939",
-        "#f7394f",
-        "#f78b39",
-        "#69c73a",
-        "#42eb4a",
-        "#42eb4a"
-    ];
+function updateDashboard(hotRestaurants) {
+    var range = {
+        0: "#eb3434",
+        2: "#eb344f",
+        3: "#eb6534",
+        4: "#eba834",
+        5: "#f0c032",
+        6: "#e3f032",
+        7: "#88db35",
+        8: "#53db35",
+        9: "#32e33e"
+    };
 
     document.getElementById("restaurants-dash").innerHTML = "";
 
-    for (let key in restaurants) {
-        let restaurant = restaurants[key];
+    for (let key in hotRestaurants) {
+        let restaurant = hotRestaurants[key];
         let dropdownOptions = "";
         for (let c of restaurant.classes) {
             dropdownOptions +=
@@ -54,8 +60,9 @@ function updateDashboard() {
         }
 
         var timeText = {
-            week: "Vecka",
-            month: "Månad",
+            week: "7 dagar",
+            month: "30 dagar",
+            threemonths: "90 dagar",
             year: "År",
             all: "Allt"
         };
@@ -128,13 +135,30 @@ function updateDashboard() {
 	<div class="separator"></div>`;
 
         setTimeout(() => {
+            var cancelCircle = false;
+            var cancelGraph = false;
+
+            if (restaurants[restaurant.code_name]) {
+                if (
+                    restaurants[restaurant.code_name].todays_score ==
+                    restaurant.todays_score
+                ) {
+                    cancelCircle = true;
+                }
+            }
+
+            var color = range[0];
+            for (let key in range) {
+                if (key > restaurant.todays_score) break;
+                color = range[key];
+            }
             let bar = new ProgressBar.Circle(
                 document.getElementById(`score-meter-${restaurant.code_name}`),
                 {
                     strokeWidth: 10,
                     easing: "easeInOut",
-                    duration: 1000,
-                    color: range[Math.floor(restaurant.todays_score / 2)],
+                    duration: cancelCircle ? 0 : 1000,
+                    color: color,
                     trailColor: "none",
                     trailWidth: 0
                 }
@@ -142,17 +166,12 @@ function updateDashboard() {
 
             bar.animate(restaurant.todays_score / 10);
 
-            drawGraph(restaurant.code_name);
+            if (!cancelGraph) drawGraph(restaurant);
         }); // Number from 0.0 to 1.0
     }
-
-    /*
-     */
 }
 
 function drawGraph(restaurant) {
-    restaurant = restaurants[restaurant];
-
     var ctx = document
         .getElementById("chart-" + restaurant.code_name)
         .getContext("2d");
