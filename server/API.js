@@ -4,6 +4,7 @@ module.exports = class API {
         const db = new (require("./Database"))(config);
 
         function isOpen() {
+            return true; // Always open
             var today = new Date();
             // Check open hours
             return (
@@ -203,30 +204,43 @@ module.exports = class API {
                 return;
             }
 
+            var comments = [];
+            var commentsFromDB = await db.query(
+                "SELECT * FROM forms WHERE CHAR_LENGTH(comments) > 2 AND user > 0 LIMIT 100"
+            );
+
+            for (var entry of commentsFromDB) {
+                var comment = {};
+                comment.date = entry.submitted.getTime();
+                comment.text = JSON.parse(entry.comments);
+                comment.rating = entry.rating;
+                comment.notified_staff = entry.notified_staff;
+
+                var student = await db.query_one(
+                    "SELECT * FROM users WHERE id = ?",
+                    entry.user
+                );
+
+                if (student) {
+                    // TODO UPDATE FOR RESTAURANT FIX BUG
+                    var studentClass = await db.query_one(
+                        "SELECT * FROM classes WHERE id = ?",
+                        student.class
+                    );
+
+                    comment.restaurant = studentClass.restaurant;
+
+                    comment.special = {
+                        veg: student.veg,
+                        gluten: student.gluten
+                    };
+
+                    comments.push(comment);
+                }
+            }
+
             this.respond(res, true, "Success", {
-                comments: [
-                    {
-                        date: 1575327651406,
-                        text: ["Kall mat", "Lång kö"],
-                        rating: 3,
-                        restaurant: "olearys",
-                        special: ["veg"]
-                    },
-                    {
-                        date: 1575327651406,
-                        text: ["Kall mat", "Annat..?"],
-                        rating: 0,
-                        restaurant: "greek",
-                        special: []
-                    },
-                    {
-                        date: 1575327651406,
-                        text: ["Kall mat"],
-                        rating: 1,
-                        restaurant: "olearys",
-                        special: ["gluten", "veg"]
-                    }
-                ]
+                comments
             });
         });
 

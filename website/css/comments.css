@@ -1,18 +1,34 @@
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-.material-icons.md-96 { 
-    font-size: 96px; 
+.material-icons.md-96 {
+	font-size: 96px;
 }
 
 .user-comment {
-    font-size: 18px;
-    border: 1px solid black;
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
-    text-align: center;
+	font-size: 18px;
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	background: rgb(245, 245, 245);
+	text-align: center;
+	border-radius: 5px;
+
+}
+
+.comment-box {
+	background: rgb(255, 255, 255);
+	border: none;
+	border-radius: 20px;
+	box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+}
+
+.simley {
+	/* background: white; */
+	border-radius: 1000px;
+
+
 }
