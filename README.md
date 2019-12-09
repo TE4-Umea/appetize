@@ -25,6 +25,13 @@ Prerequisites
 1. Install packages `cd server && npm i`
 1. Start the project `node index.js`
 
+## Generate and insert mock data
+
+NOTE Inserting the mock data can take 1-30 minutes depending on what computer the server is running on. Restrict the amount of days of mock data and students depending on needs.
+
+1. Generate `cd server && node GenerateMockData.js`
+1. Insert `mysql -u username -p appetize < MockData.sql`
+
 # Systems description
 
 ![](assets/klassdiagram.png)
